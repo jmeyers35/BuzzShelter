@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context="edu.gatech.cs2340.team67.homelessshelter.MainActivity">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="295dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="459dp"
+        android:onClick="buttonLogoutCallBack"
+        android:text="@string/main_activity_logout_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
