@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter;
+package edu.gatech.cs2340.team67.homelessshelter.Controller;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,25 +8,29 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import edu.gatech.cs2340.team67.homelessshelter.Model.Model;
+import edu.gatech.cs2340.team67.homelessshelter.R;
+
 public class LoginActivity extends AppCompatActivity {
     EditText editTextUsername;
     EditText editTextPassword;
+    private final Model model = Model.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editTextUsername = (EditText)findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
     }
 
     public void buttonLoginCallback(View view) {
-        //#TODO: set up actual login with a user account
-        String username = "user";
-        String password = "password";
+        String user = editTextUsername.getText().toString();
+        String pass = editTextPassword.getText().toString();
 
-        if (editTextUsername.getText().toString().equals(username) && editTextPassword.getText().toString().equals(password)) {
+
+        if (model.validateUser(user,pass)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {

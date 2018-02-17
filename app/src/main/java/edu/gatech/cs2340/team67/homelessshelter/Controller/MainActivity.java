@@ -1,10 +1,12 @@
-package edu.gatech.cs2340.team67.homelessshelter;
+package edu.gatech.cs2340.team67.homelessshelter.Controller;
 
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+
+import edu.gatech.cs2340.team67.homelessshelter.R;
 
 
 public class MainActivity extends AppCompatActivity {
