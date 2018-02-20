@@ -20,6 +20,7 @@ public class Model {
 
     public Model(){
         _users = new ArrayList<User>();
+        _currentUser = null;
 
     }
 
@@ -33,10 +34,18 @@ public class Model {
 
     }
 
+    /*
+    * Attempts user login
+    * @param username username
+    * @param password password
+    * @return true is login success, false if failure
+    *
+    */
     public boolean loginUser(String username, String password)  {
         for (User user : _users) {
             if (user.getUsername().equals(username)) {
                 if (user.getPassword().equals(password)) {
+                    _currentUser = user;
                     return true;
                 }
             }
@@ -45,6 +54,7 @@ public class Model {
     }
 
     public List getUsers(){ return _users; }
+    public User getCurrentUser() {return _currentUser; }
 
 
 
