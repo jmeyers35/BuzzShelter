@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         if (_model.loginUser(username_input, password_input)) {
             //User found and password correct!
             Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent); //#TODO: pass in the user to the intent
+            startActivity(intent);
 
         } else {
             //Not a username or not a user-password match

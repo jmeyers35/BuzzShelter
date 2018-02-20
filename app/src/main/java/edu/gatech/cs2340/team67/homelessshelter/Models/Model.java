@@ -16,7 +16,7 @@ public class Model {
     /** holds the list of all users */
     private List<User> _users;
 
-    private User _currentUser; //#TODO: keep track of logged in user for use of his preferences
+    private User _currentUser; //logged in user
 
     public Model(){
         _users = new ArrayList<User>();
