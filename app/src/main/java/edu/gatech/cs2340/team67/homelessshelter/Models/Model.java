@@ -48,9 +48,30 @@ public class Model {
                     _currentUser = user;
                     return true;
                 }
+                return false;
             }
         }
         return false;
+    }
+
+    /*
+    * Attempts user registration
+    * @param username username
+    * @param password password
+    * @return true is registration success, false if failure
+    *
+    */
+    public boolean registerUser(String username, String password)  {
+        for (User user : _users) {
+            if (user.getUsername().equals(username)) {
+                return false;
+            }
+        }
+        User newUser = new User(username, password);
+        addUser(newUser);
+        _currentUser = newUser;
+
+        return true;
     }
 
     public List getUsers(){ return _users; }

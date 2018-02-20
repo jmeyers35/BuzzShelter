@@ -1,10 +1,12 @@
 package edu.gatech.cs2340.team67.homelessshelter.Controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.Models.User;
@@ -30,11 +32,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         String username_input = editTextUsername.getText().toString();
         String password_input = editTextPassword.getText().toString();
+        if(_model.registerUser(username_input, password_input)) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            //failed registration
+            Context context = getApplicationContext();
+            CharSequence text = "Username already in user";
+            int duration = Toast.LENGTH_SHORT;
 
-        _model.addUser(username_input, password_input);
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
 
     }
 
