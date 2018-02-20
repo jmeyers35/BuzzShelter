@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,18 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         Model _model = Model.getInstance();
         String username_input = editTextUsername.getText().toString();
         String password_input = editTextPassword.getText().toString();
-        boolean login = false;
 
-        ArrayList<User> userList = (ArrayList)_model.getUsers();
-
-        for (User user : userList) {
-            if (user.getUsername().equals(username_input)) {
-                if (user.getPassword().equals(password_input)) {
-                    login = true;
-                }
-            }
-        }
-        if (login) {
+        if (_model.loginUser(username_input, password_input)) {
             //User found and password correct!
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent); //#TODO: pass in the user to the intent
