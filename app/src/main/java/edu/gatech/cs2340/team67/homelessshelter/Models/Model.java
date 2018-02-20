@@ -29,8 +29,8 @@ public class Model {
 
     }
 
-    public void addUser(String username, String password) {
-        _users.add(new User(username, password));
+    public void addUser(String username, String password, boolean isAdmin) {
+        _users.add(new User(username, password, isAdmin));
 
     }
 
@@ -58,16 +58,17 @@ public class Model {
     * Attempts user registration
     * @param username username
     * @param password password
+    * @param isAdmin administrative status
     * @return true is registration success, false if failure
     *
     */
-    public boolean registerUser(String username, String password)  {
+    public boolean registerUser(String username, String password, boolean isAdmin)  {
         for (User user : _users) {
             if (user.getUsername().equals(username)) {
                 return false;
             }
         }
-        User newUser = new User(username, password);
+        User newUser = new User(username, password, isAdmin);
         addUser(newUser);
         _currentUser = newUser;
 
