@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter;
+package edu.gatech.cs2340.team67.homelessshelter.Controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.Models.User;
+import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class LoginActivity extends AppCompatActivity {
     EditText editTextUsername;
@@ -22,16 +28,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void buttonLoginCallback(View view) {
-        //#TODO: set up actual login with a user account
-        String username = "user";
-        String password = "password";
+        Model _model = Model.getInstance();
+        String username_input = editTextUsername.getText().toString();
+        String password_input = editTextPassword.getText().toString();
+        boolean login = false;
 
-        if (editTextUsername.getText().toString().equals(username) && editTextPassword.getText().toString().equals(password)) {
+        ArrayList<User> userList = (ArrayList)_model.getUsers();
+
+        for (User user : userList) {
+            if (user.getUsername().equals(username_input)) {
+                if (user.getPassword().equals(password_input)) {
+                    login = true;
+                }
+            }
+        }
+        if (login) {
+            //User found and password correct!
             Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            startActivity(intent); //#TODO: pass in the user to the intent
+
         } else {
+            //Not a username or not a user-password match
             Context context = getApplicationContext();
-            CharSequence text = "Failed Login!";
+            CharSequence text = "Username or Password Incorrect";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);

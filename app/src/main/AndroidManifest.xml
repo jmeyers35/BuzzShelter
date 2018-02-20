@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".Controllers.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:parentActivityName=".WelcomeActivity"/>
+        <activity android:name=".Controllers.LoginActivity" android:parentActivityName=".Controllers.WelcomeActivity"/>
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".WelcomeActivity"/>
-        <activity android:name=".MainActivity" />
+            android:name=".Controllers.RegisterActivity"
+            android:parentActivityName=".Controllers.WelcomeActivity"/>
+        <activity android:name=".Controllers.MainActivity" />
     </application>
 
 </manifest>
