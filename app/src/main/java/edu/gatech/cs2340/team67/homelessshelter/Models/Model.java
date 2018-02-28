@@ -112,17 +112,15 @@ public class Model {
             // Get data from the split line
 
             String name = data[1];
-            int capacity = Integer.parseInt(data[2]);
-            String restrictions = data[3];
+            String capacity = data[2];
             double longitude = Double.parseDouble(data[4]);
             double latitude = Double.parseDouble(data[5]);
             String address = data[6];
-            String specialNotes = data[7];
             String phoneNumber = data[8];
 
             //Instantiate a new Shelter
             Shelter shelter = new Shelter(name,capacity,longitude,
-                    latitude,address,restrictions,specialNotes,phoneNumber);
+                    latitude,address,phoneNumber);
             _shelters.add(shelter);
 
         }

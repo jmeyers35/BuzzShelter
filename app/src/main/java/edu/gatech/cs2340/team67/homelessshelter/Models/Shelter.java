@@ -9,24 +9,21 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 public class Shelter {
 
     private String name;
-    private int capacity;
+    private String capacity;
+
     private double longitude;
     private double latitude;
     private String address;
-    private String restrictions;
-    private String specialNotes;
     private String phoneNumber;
 
 
-    public Shelter(String name, int capacity, double longitude, double latitude,
-                   String address, String restrictions, String specialNotes, String phoneNumber) {
+    public Shelter(String name, String capacity, double longitude, double latitude,
+                   String address, String phoneNumber) {
         this.name = name;
         this.capacity = capacity;
         this.longitude = longitude;
         this.latitude = latitude;
         this.address = address;
-        this.restrictions = restrictions;
-        this.specialNotes = specialNotes;
         this.phoneNumber = phoneNumber;
     }
 
@@ -34,7 +31,7 @@ public class Shelter {
         return name;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
@@ -48,14 +45,6 @@ public class Shelter {
 
     public String getAddress() {
         return address;
-    }
-
-    public String getRestrictions() {
-        return restrictions;
-    }
-
-    public String getSpecialNotes() {
-        return specialNotes;
     }
 
     public String getPhoneNumber() {
