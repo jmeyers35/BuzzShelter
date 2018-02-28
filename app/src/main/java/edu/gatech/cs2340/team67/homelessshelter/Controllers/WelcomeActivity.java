@@ -1,19 +1,22 @@
 package edu.gatech.cs2340.team67.homelessshelter.Controllers;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends ListActivity {
 
     private final Model model =Model.getInstance();
     private final String TAG = "Welcome_Activity";
@@ -32,6 +35,10 @@ public class WelcomeActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
+        // TODO fix this
+        ArrayAdapter<Shelter> adapter = new ArrayAdapter<Shelter>(getListView().getContext(), android.R.layout.simple_list_item_1, model.getShelters());
+        getListView().setAdapter(adapter);
+
     }
 
     public void buttonLoginCallback(View view) {
