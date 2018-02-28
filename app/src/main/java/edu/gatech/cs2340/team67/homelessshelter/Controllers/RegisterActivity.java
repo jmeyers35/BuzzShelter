@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             //failed registration
             Context context = getApplicationContext();
-            CharSequence text = "Username is taken";
+            CharSequence text = "Registration Failed";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);

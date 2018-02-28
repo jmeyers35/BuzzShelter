@@ -23,8 +23,6 @@ public class Model {
     public static Model getInstance() { return _instance; }
 
     /** holds the list of all users */
-
-
     private List<User> _users;
 
     private User _currentUser; //logged in user
@@ -81,6 +79,12 @@ public class Model {
             if (user.getUsername().equals(username)) {
                 return false;
             }
+        }
+        if (username.length() > 10 ||
+                username.length() < 1 ||
+                password.length() > 10 ||
+                password.length() < 1) {
+            return false;
         }
         User newUser = new User(username, password, isAdmin);
         addUser(newUser);
