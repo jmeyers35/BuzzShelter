@@ -15,4 +15,6 @@
     </string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="main_activity_logout_button">Logout</string>
+    <string name="title_shelter_list">Shelters</string>
+    <string name="title_shelter_detail">Shelter Detail</string>
 </resources>

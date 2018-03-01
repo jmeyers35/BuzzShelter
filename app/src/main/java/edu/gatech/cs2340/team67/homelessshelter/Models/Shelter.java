@@ -10,17 +10,18 @@ public class Shelter {
 
     private String name;
     private String capacity;
-
+    private String restrictions;
     private double longitude;
     private double latitude;
     private String address;
     private String phoneNumber;
 
 
-    public Shelter(String name, String capacity, double longitude, double latitude,
+    public Shelter(String name, String capacity, String restrictions, double longitude, double latitude,
                    String address, String phoneNumber) {
         this.name = name;
         this.capacity = capacity;
+        this.restrictions = restrictions;
         this.longitude = longitude;
         this.latitude = latitude;
         this.address = address;

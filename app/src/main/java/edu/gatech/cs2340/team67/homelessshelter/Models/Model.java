@@ -46,6 +46,22 @@ public class Model {
 
     }
 
+
+    /*
+   * Looks for Shelter by name
+   * @param name Shelter's name
+   * @return Shelter object with name, or null if not a shelter //#TODO FIND A BETTER WAY THAN NULL RETURN
+   *
+   */
+    public Shelter getShelterByName(String name) {
+        for(Shelter s : _shelters) {
+            if (s.getName().equals(name)){
+                return s;
+            }
+        }
+        return null;
+    }
+
     /*
     * Attempts user login
     * @param username username
@@ -117,13 +133,14 @@ public class Model {
 
             String name = data[1];
             String capacity = data[2];
+            String restrictions = data[3];
             double longitude = Double.parseDouble(data[4]);
             double latitude = Double.parseDouble(data[5]);
             String address = data[6];
             String phoneNumber = data[8];
 
             //Instantiate a new Shelter
-            Shelter shelter = new Shelter(name,capacity,longitude,
+            Shelter shelter = new Shelter(name,capacity, restrictions, longitude,
                     latitude,address,phoneNumber);
             _shelters.add(shelter);
 

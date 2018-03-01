@@ -16,11 +16,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controllers.LoginActivity" android:parentActivityName=".Controllers.WelcomeActivity"/>
+        <activity
+            android:name=".Controllers.LoginActivity"
+            android:parentActivityName=".Controllers.WelcomeActivity" />
         <activity
             android:name=".Controllers.RegisterActivity"
-            android:parentActivityName=".Controllers.WelcomeActivity"/>
+            android:parentActivityName=".Controllers.WelcomeActivity" />
         <activity android:name=".Controllers.MainActivity" />
+        <activity
+            android:name=".Controllers.ShelterListActivity"
+            android:label="@string/title_shelter_list"
+            android:parentActivityName=".Controllers.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.gatech.cs2340.team67.homelessshelter.Controllers.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Controllers.ShelterDetailActivity"
+            android:label="@string/title_shelter_detail"
+            android:parentActivityName=".Controllers.ShelterListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.gatech.cs2340.team67.homelessshelter.Controllers.ShelterListActivity" />
+        </activity>
     </application>
 
 </manifest>

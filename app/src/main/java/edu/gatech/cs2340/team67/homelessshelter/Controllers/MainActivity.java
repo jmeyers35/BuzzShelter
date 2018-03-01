@@ -24,4 +24,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void buttonShelterListCallBack(View view) {
+        Intent intent = new Intent(this, ShelterListActivity.class);
+        startActivity(intent);
+
+    }
 }
