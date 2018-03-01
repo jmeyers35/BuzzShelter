@@ -36,6 +36,8 @@ public class Shelter {
         return capacity;
     }
 
+    public String getRestrictions() { return  restrictions; }
+
     public double getLongitude() {
         return longitude;
     }
