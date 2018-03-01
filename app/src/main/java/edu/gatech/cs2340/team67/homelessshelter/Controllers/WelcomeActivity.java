@@ -35,9 +35,9 @@ public class WelcomeActivity extends ListActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
-        // TODO fix this
-        ArrayAdapter<Shelter> adapter = new ArrayAdapter<Shelter>(getListView().getContext(), android.R.layout.simple_list_item_1, model.getShelters());
-        getListView().setAdapter(adapter);
+//        // TODO fix this
+//        ArrayAdapter<Shelter> adapter = new ArrayAdapter<>(getListView().getContext(), android.R.layout.activity_list_item, model.getShelters());
+//        getListView().setAdapter(adapter);
 
     }
 

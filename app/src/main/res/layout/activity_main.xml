@@ -18,10 +18,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+
 
 
 </android.support.constraint.ConstraintLayout>
