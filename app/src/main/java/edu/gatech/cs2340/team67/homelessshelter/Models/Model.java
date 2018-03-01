@@ -117,13 +117,14 @@ public class Model {
 
             String name = data[1];
             String capacity = data[2];
+            String restrictions = data[3];
             double longitude = Double.parseDouble(data[4]);
             double latitude = Double.parseDouble(data[5]);
             String address = data[6];
             String phoneNumber = data[8];
 
             //Instantiate a new Shelter
-            Shelter shelter = new Shelter(name,capacity,longitude,
+            Shelter shelter = new Shelter(name,capacity,restrictions,longitude,
                     latitude,address,phoneNumber);
             _shelters.add(shelter);
 

@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     tools:context="edu.gatech.cs2340.team67.homelessshelter.Controllers.MainActivity">
 
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="368dp"
+        android:layout_height="439dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="444dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="280dp"
         android:onClick="buttonLogoutCallBack"
         android:text="@string/main_activity_logout_button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
