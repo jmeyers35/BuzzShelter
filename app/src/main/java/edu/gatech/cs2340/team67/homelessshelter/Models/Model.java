@@ -29,7 +29,7 @@ public class Model {
 
     private ArrayList<Shelter> _shelters;
 
-    public Model(){
+    private Model(){
         _users = new ArrayList<>();
         _currentUser = null;
         _shelters = new ArrayList<>();
