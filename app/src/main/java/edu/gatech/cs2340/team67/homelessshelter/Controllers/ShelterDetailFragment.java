@@ -47,7 +47,7 @@ public class ShelterDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = _model.getShelterByName(getArguments().getString(ARG_ITEM_ID)); //GETS THE SHELTER OBJECT WE CLICKED ON #TODO Warning the function could return null? but not really as we can't click null
+            mItem = _model.getShelterById(getArguments().getInt(ARG_ITEM_ID)); //GETS THE SHELTER OBJECT WE CLICKED ON
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);

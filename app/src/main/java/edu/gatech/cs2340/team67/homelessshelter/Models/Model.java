@@ -50,16 +50,16 @@ public class Model {
     /*
    * Looks for Shelter by name
    * @param name Shelter's name
-   * @return Shelter object with name, or null if not a shelter //#TODO FIND A BETTER WAY THAN NULL RETURN
+   * @return Shelter object with name, or "error" shelter if it does not exist
    *
    */
-    public Shelter getShelterByName(String name) {
+    public Shelter getShelterById(int id) {
         for(Shelter s : _shelters) {
-            if (s.getName().equals(name)){
+            if (s.getId() == id){
                 return s;
             }
         }
-        return null;
+        return new Shelter(id, "error", "","",0,0,"", "" ); //blank shelter
     }
 
     /*
@@ -130,7 +130,7 @@ public class Model {
             String[] data = line.split(",");
 
             // Get data from the split line
-
+            int id = Integer.parseInt(data[0]);
             String name = data[1];
             String capacity = data[2];
             String restrictions = data[3];
@@ -140,7 +140,7 @@ public class Model {
             String phoneNumber = data[8];
 
             //Instantiate a new Shelter
-            Shelter shelter = new Shelter(name,capacity, restrictions, longitude,
+            Shelter shelter = new Shelter(id, name,capacity, restrictions, longitude,
                     latitude,address,phoneNumber);
             _shelters.add(shelter);
 
