@@ -7,25 +7,22 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 public class User {
 
     private String username;
-    private String password;
+    private static int uid;
     private boolean isAdmin; //true if admin, false if not
-    private boolean isBanned;
 
-    public User(String username, String password, boolean isAdmin) {
+
+    public User(String username, boolean isAdmin) {
         this.username = username;
-        this.password = password;
+        uid++;
         this.isAdmin = isAdmin;
 
     }
 
     public String getUsername() { return username; }
-    public String getPassword() { return password; }
     public boolean getAdminStatus() { return isAdmin; }
-    public boolean getBannedStatus() {return isBanned;}
 
-    public void setBanned(boolean banned) {
-        isBanned = banned;
-    }
+
+
 
 
 

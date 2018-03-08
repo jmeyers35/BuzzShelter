@@ -2,6 +2,8 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -25,7 +27,7 @@ public class Model {
     /** holds the list of all users */
     private List<User> _users;
 
-    private User _currentUser; //logged in user
+    private FirebaseUser _currentUser; //logged in user
 
     private ArrayList<Shelter> _shelters;
 
@@ -41,8 +43,8 @@ public class Model {
 
     }
 
-    public void addUser(String username, String password, boolean isAdmin) {
-        _users.add(new User(username, password, isAdmin));
+    public void addUser(String username, boolean isAdmin) {
+        _users.add(new User(username,isAdmin));
 
     }
 
@@ -62,56 +64,14 @@ public class Model {
         return null;
     }
 
-    /*
-    * Attempts user login
-    * @param username username
-    * @param password password
-    * @return true is login success, false if failure
-    *
-    */
-    public boolean loginUser(String username, String password)  {
-        for (User user : _users) {
-            if (user.getUsername().equals(username)) {
-                if (user.getPassword().equals(password)) {
-                    _currentUser = user;
-                    return true;
-                }
-                return false;
-            }
-        }
-        return false;
-    }
 
-    /*
-    * Attempts user registration
-    * @param username username
-    * @param password password
-    * @param isAdmin administrative status
-    * @return true is registration success, false if failure
-    *
-    */
-    public boolean registerUser(String username, String password, boolean isAdmin)  {
-        for (User user : _users) {
-            if (user.getUsername().equals(username)) {
-                return false;
-            }
-        }
-        if (username.length() > 10 ||
-                username.length() < 1 ||
-                password.length() > 10 ||
-                password.length() < 1) {
-            return false;
-        }
-        User newUser = new User(username, password, isAdmin);
-        addUser(newUser);
-        _currentUser = newUser;
-
-        return true;
-    }
 
     public List getUsers(){ return _users; }
-    public User getCurrentUser() {return _currentUser; }
+    public FirebaseUser getCurrentUser() {return _currentUser; }
     public ArrayList<Shelter> getShelters() {return _shelters;}
+    public void setUser(FirebaseUser user ) {
+        _currentUser = user;
+    }
 
 
     /**

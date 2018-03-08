@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextPassword;
     CheckBox checkBoxAdminStatus;
     FirebaseAuth mAuth;
+    Model model = Model.getInstance();
 
 
     @Override
@@ -44,15 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void buttonRegisterCallback(View view) {
-
-
-
-        Model _model = Model.getInstance();
-
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         boolean isAdmin = checkBoxAdminStatus.isChecked();
-        createAccount(email, password);
+        createAccount(email, password, isAdmin);
     }
 
     public void buttonCancelCallback(View view) {
@@ -61,11 +57,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, String password, boolean isAdmin) {
         Log.d(TAG, "createAccount:" + email);
         if (!validateInputs()) {
             return;
         }
+        final String femail = email;
+        final boolean fisAdmin = isAdmin;
 
         final Intent intent = new Intent(this, MainActivity.class);
 
@@ -76,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail: success");
                             showSuccessMessage();
+                            model.addUser(femail, fisAdmin);
                             startActivity(intent);
                         }
                     }

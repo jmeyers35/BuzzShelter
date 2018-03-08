@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private FirebaseAuth mAuth;
+    private Model model = Model.getInstance();
 
 
     @Override
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         signIn(email, password);
+        model.setUser(mAuth.getCurrentUser());
     }
 
 
