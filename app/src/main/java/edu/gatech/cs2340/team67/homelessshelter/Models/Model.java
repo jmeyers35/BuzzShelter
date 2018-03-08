@@ -53,13 +53,14 @@ public class Model {
    * @return Shelter object with name, or "error" shelter if it does not exist
    *
    */
-    public Shelter getShelterById(int id) {
+    public Shelter getShelterByName(String name) {
         for(Shelter s : _shelters) {
-            if (s.getId() == id){
+            if (s.getName().equals(name)){
+
                 return s;
             }
         }
-        return new Shelter(id, "error", "","",0,0,"", "" ); //blank shelter
+        return new Shelter(0, "error", "","",0,0,"", "" ); //blank shelter
     }
 
     /*
@@ -140,7 +141,7 @@ public class Model {
             String phoneNumber = data[8];
 
             //Instantiate a new Shelter
-            Shelter shelter = new Shelter(id, name,capacity, restrictions, longitude,
+            Shelter shelter = new Shelter(id, name, capacity, restrictions, longitude,
                     latitude,address,phoneNumber);
             _shelters.add(shelter);
 
