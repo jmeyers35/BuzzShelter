@@ -201,15 +201,23 @@ public class ShelterListActivity extends AppCompatActivity {
 
                             // match conditions
                             // here we are looking for name or phone number match
-                            /*if (row.getName().toLowerCase().contains(charString.toLowerCase()) ||
-                                    row.getPhone().contains(charSequence) ||
-                                    row.getGender().contrains(charSequence) ||
-                                    ) {
-                                filteredList.add(row);
-                            }*/
-                            //#TODO: this only searches the name. Make it search more like above but remember about unspecified
-                             if (row.getName().toLowerCase().contains(charString.toLowerCase()) ) {
-                                filteredList.add(row);
+                            //#TODO: add better filtering options
+                             if (row.getName().toLowerCase().contains(charString.toLowerCase()) ||
+                                     row.getRestrictions().toLowerCase().contains(charString.toLowerCase())) {
+                                 if (charString.toLowerCase().contentEquals("men")) {
+                                     if(!row.getRestrictions().toLowerCase().contains("women") ||
+                                             row.getRestrictions().toLowerCase().contains("anyone")) {
+                                         filteredList.add(row); //#TODO need a better way, but this kinda handles weird 'men" characters in 'women' case
+                                     }
+
+                                 } else if (charString.toLowerCase().contentEquals("male")) {
+                                     if(!row.getRestrictions().toLowerCase().contains("female") ||
+                                             row.getRestrictions().toLowerCase().contains("anyone")) {
+                                         filteredList.add(row);//#TODO need a better way, but this kinda handles weird 'men" characters in 'women' case
+                                     }
+                                 } else {
+                                     filteredList.add(row);
+                                 }
                             }
 
                         }
