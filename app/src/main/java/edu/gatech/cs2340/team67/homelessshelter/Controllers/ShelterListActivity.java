@@ -12,6 +12,8 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import android.support.v7.app.ActionBar;
@@ -23,6 +25,7 @@ import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -99,9 +102,10 @@ public class ShelterListActivity extends AppCompatActivity {
     }
 
     public class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
+            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> implements Filterable {
 
         private final List<Shelter> mValues;
+        private List<Shelter> mValuesFiltered;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,5 +163,54 @@ public class ShelterListActivity extends AppCompatActivity {
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
         }
+
+        @Override
+        public Filter getFilter() {
+            return new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence charSequence) {
+                    String charString = charSequence.toString();
+                    if (charString.isEmpty()) {
+                        mValuesFiltered = mValues;
+                    } else {
+                        List<Shelter> filteredList = new ArrayList<>();
+                        for (Shelter row : mValues) {
+
+                            // match conditions
+                            // here we are looking for name or phone number match
+                            /*if (row.getName().toLowerCase().contains(charString.toLowerCase()) ||
+                                    row.getPhone().contains(charSequence) ||
+                                    row.getGender().contrains(charSequence) ||
+                                    ) {
+                                filteredList.add(row);
+                            }*/
+                            //#TODO: this only searches the name. Make it search more like above but remember about unspecified
+                             if (row.getName().toLowerCase().contains(charString.toLowerCase()) ) {
+                                filteredList.add(row);
+                            }
+
+                        }
+
+                        mValuesFiltered = filteredList;
+                    }
+
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = mValuesFiltered;
+                    return filterResults;
+                }
+
+                @Override
+                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                    mValuesFiltered = (ArrayList<Shelter>) filterResults.values;
+                    notifyDataSetChanged();
+                }
+            };
+        }
+
+
+
+
+
+
     }
 }
