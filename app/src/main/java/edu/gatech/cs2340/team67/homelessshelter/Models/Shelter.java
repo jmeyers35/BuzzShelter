@@ -8,6 +8,7 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 
 public class Shelter {
 
+    private int id;
     private String name;
     private String capacity;
     private String restrictions;
@@ -17,8 +18,9 @@ public class Shelter {
     private String phoneNumber;
 
 
-    public Shelter(String name, String capacity, String restrictions, double longitude, double latitude,
+    public Shelter(int id, String name, String capacity, String restrictions, double longitude, double latitude,
                    String address, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.capacity = capacity;
         this.restrictions = restrictions;
@@ -27,6 +29,8 @@ public class Shelter {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
+
+    public int getId() { return id; }
 
     public String getName() {
         return name;
