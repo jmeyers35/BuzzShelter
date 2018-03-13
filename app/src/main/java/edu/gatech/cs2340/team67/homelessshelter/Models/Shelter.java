@@ -11,6 +11,7 @@ public class Shelter {
     private int id;
     private String name;
     private String capacity;
+    private String vacancy;
     private String restrictions;
     private double longitude;
     private double latitude;
@@ -18,11 +19,12 @@ public class Shelter {
     private String phoneNumber;
 
 
-    public Shelter(int id, String name, String capacity, String restrictions, double longitude, double latitude,
+    public Shelter(int id, String name, String capacity, String vacancy, String restrictions, double longitude, double latitude,
                    String address, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
+        this.vacancy = vacancy;
         this.restrictions = restrictions;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -38,6 +40,14 @@ public class Shelter {
 
     public String getCapacity() {
         return capacity;
+    }
+
+    public String getVacancy() {
+        return vacancy;
+    }
+
+    public void setVacancy(String vacancy) {
+        this.vacancy = vacancy;
     }
 
     public String getRestrictions() { return  restrictions; }

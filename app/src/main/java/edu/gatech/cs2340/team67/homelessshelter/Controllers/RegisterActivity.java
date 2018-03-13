@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail: success");
                             showSuccessMessage();
-                            model.addUser(femail, fisAdmin);
+                            model.addUser(femail, fisAdmin, false);
                             startActivity(intent);
                         }
                     }

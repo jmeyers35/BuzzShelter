@@ -17,4 +17,13 @@
     <string name="main_activity_logout_button">Logout</string>
     <string name="title_shelter_list">Shelters</string>
     <string name="title_shelter_detail">Shelter Detail</string>
+
+    <!-- String array for reservations -->
+    <string-array name="numBeds_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>

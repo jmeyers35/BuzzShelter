@@ -43,8 +43,8 @@ public class Model {
 
     }
 
-    public void addUser(String username, boolean isAdmin) {
-        _users.add(new User(username,isAdmin));
+    public void addUser(String username, boolean isAdmin, boolean hasClaimedBed) {
+        _users.add(new User(username,isAdmin, hasClaimedBed));
 
     }
 
@@ -62,7 +62,7 @@ public class Model {
                 return s;
             }
         }
-        return new Shelter(0, "error", "","",0,0,"", "" ); //blank shelter
+        return new Shelter(0, "error", "","", "",0,0,"", "" ); //blank shelter
     }
 
 
@@ -94,6 +94,7 @@ public class Model {
             int id = Integer.parseInt(data[0]);
             String name = data[1];
             String capacity = data[2];
+            String vacancy = data[2];
             String restrictions = data[3];
             double longitude = Double.parseDouble(data[4]);
             double latitude = Double.parseDouble(data[5]);
@@ -101,7 +102,7 @@ public class Model {
             String phoneNumber = data[8];
 
             //Instantiate a new Shelter
-            Shelter shelter = new Shelter(id, name, capacity, restrictions, longitude,
+            Shelter shelter = new Shelter(id, name, capacity, vacancy, restrictions, longitude,
                     latitude,address,phoneNumber);
             _shelters.add(shelter);
 
