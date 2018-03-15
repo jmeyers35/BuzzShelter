@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.FirebaseDatabase;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.Models.User;
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextPassword;
     CheckBox checkBoxAdminStatus;
     FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
     Model model = Model.getInstance();
 
 
@@ -37,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
-
         editTextUsername = (EditText)findViewById(R.id.editTextUsername);
         editTextPassword = (EditText)findViewById(R.id.editTextPassword);
         checkBoxAdminStatus = (CheckBox)findViewById(R.id.checkBoxAdminStatus);

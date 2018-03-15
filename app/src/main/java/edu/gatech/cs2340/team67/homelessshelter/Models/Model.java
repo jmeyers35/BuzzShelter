@@ -3,6 +3,8 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,22 +31,27 @@ public class Model {
 
     private FirebaseUser _currentUser; //logged in user
 
+    private FirebaseDatabase _database;
+
     private ArrayList<Shelter> _shelters;
 
     private Model(){
         _users = new ArrayList<>();
         _currentUser = null;
         _shelters = new ArrayList<>();
-
+        _database = FirebaseDatabase.getInstance();
     }
 
     public void addUser(User user) {
         _users.add(user);
+        DatabaseReference users = _database.getReference("users");
+        String id = users.push().getKey();
+        users.child(id).setValue(user);
 
     }
 
     public void addUser(String username, boolean isAdmin) {
-        _users.add(new User(username,isAdmin));
+        addUser(new User(username,isAdmin));
 
     }
 
@@ -104,6 +111,9 @@ public class Model {
             Shelter shelter = new Shelter(id, name, capacity, restrictions, longitude,
                     latitude,address,phoneNumber);
             _shelters.add(shelter);
+//            DatabaseReference shelters = _database.getReference("shelters");
+//            String fbID = shelters.push().getKey();
+//            shelters.child(fbID).setValue(shelter);
 
         }
 

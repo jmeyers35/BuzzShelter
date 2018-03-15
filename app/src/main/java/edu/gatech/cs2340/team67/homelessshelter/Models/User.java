@@ -7,20 +7,25 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 public class User {
 
     private String username;
-    private static int uid;
     private boolean isAdmin; //true if admin, false if not
+    private int spotsClaimed;
 
+    public User() {}
 
     public User(String username, boolean isAdmin) {
         this.username = username;
-        uid++;
         this.isAdmin = isAdmin;
+        this.spotsClaimed = 0;
 
     }
 
     public String getUsername() { return username; }
     public boolean getAdminStatus() { return isAdmin; }
+    public int getSpotsClaimed() {return spotsClaimed;}
 
+    public void setSpotsClaimed(int claimed) {
+        spotsClaimed = claimed;
+    }
 
 
 
