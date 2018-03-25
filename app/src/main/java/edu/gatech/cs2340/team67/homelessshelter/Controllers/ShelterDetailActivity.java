@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 /**
@@ -22,6 +23,11 @@ import edu.gatech.cs2340.team67.homelessshelter.R;
  * in a {@link ShelterListActivity}.
  */
 public class ShelterDetailActivity extends AppCompatActivity {
+
+    /**
+     * Represents the shelter the user is viewing.
+     */
+    private Shelter thisShelter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
