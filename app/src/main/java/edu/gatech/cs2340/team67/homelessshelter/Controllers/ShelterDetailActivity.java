@@ -12,8 +12,11 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
+import edu.gatech.cs2340.team67.homelessshelter.Models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 /**
@@ -25,9 +28,20 @@ import edu.gatech.cs2340.team67.homelessshelter.R;
 public class ShelterDetailActivity extends AppCompatActivity {
 
     /**
+     *
+     */
+    public static final String ARG_ITEM_ID = "item_id";
+    private final Model _model = Model.getInstance();
+
+    /**
      * Represents the shelter the user is viewing.
      */
     private Shelter thisShelter;
+
+    /**
+     * Represents the user.
+     */
+    private Model thisUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +87,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     .commit();
         }
 
-        Spinner numBeds = (Spinner) findViewById(R.id.numBeds);
+        Spinner numBeds = findViewById(R.id.numBeds);
         // Create array adapter using string array and a default spinner layout
         ArrayAdapter<CharSequence> bedsAdapter = ArrayAdapter.createFromResource(this,
                 R.array.numBeds_array, android.R.layout.simple_spinner_item);
@@ -81,7 +95,53 @@ public class ShelterDetailActivity extends AppCompatActivity {
         bedsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         numBeds.setAdapter(bedsAdapter);
+        numBeds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                // Gets the shelter object that the user clicked on
+                // This causes errors -------------------------------------------------------------
+                /**
+                Bundle arguments = new Bundle();
+                arguments.putString(ShelterDetailFragment.ARG_ITEM_ID,
+                        getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
+                ShelterDetailFragment fragment = new ShelterDetailFragment();
+                fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.shelter_detail_container, fragment)
+                        .commit();
+                thisShelter = _model.getShelterByName(fragment.getArguments().getString(ARG_ITEM_ID));
+                int number = Integer.parseInt(adapterView.getItemAtPosition(i).toString());
+                if (number > Integer.parseInt(thisShelter.getVacancy())) {
+                    Toast.makeText(getBaseContext(), "Not enough beds at this shelter",
+                            Toast.LENGTH_LONG).show();
+                }
+                if (thisUser.get_otherUser().getHasClaimedBed()) {
+                    Toast.makeText(getBaseContext(), "Please cancel your previous "
+                                    + "reservations if you wish to reserve a bed at this shelter.",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    thisUser.get_otherUser().setHasClaimedBed(true);
+                    int oldVacancy = Integer.parseInt(thisShelter.getVacancy());
+                    long newVacancy = oldVacancy - adapterView.getItemIdAtPosition(i);
+                    thisShelter.setVacancy(Long.toString(newVacancy));
+                    thisUser.get_otherUser().setNumBedsClaimed(newVacancy - oldVacancy);
+                    Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
+                            + " beds reserved", Toast.LENGTH_LONG).show();
+                }
+                //---------------------------------------------------------------------------------
+                **/
+                Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
+                        + " beds reserved", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

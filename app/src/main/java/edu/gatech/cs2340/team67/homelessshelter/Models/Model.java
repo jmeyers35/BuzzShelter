@@ -29,6 +29,8 @@ public class Model {
 
     private FirebaseUser _currentUser; //logged in user
 
+    private User _otherUser; // placeholder for current user
+
     private ArrayList<Shelter> _shelters;
 
     private Model(){
@@ -43,8 +45,8 @@ public class Model {
 
     }
 
-    public void addUser(String username, boolean isAdmin, boolean hasClaimedBed) {
-        _users.add(new User(username,isAdmin, hasClaimedBed));
+    public void addUser(String username, boolean isAdmin, boolean hasClaimedBed, long numBedsClaimed) {
+        _users.add(new User(username,isAdmin, hasClaimedBed, numBedsClaimed));
 
     }
 
@@ -111,5 +113,11 @@ public class Model {
     }
 
 
+    public User get_otherUser() {
+        return _otherUser;
+    }
 
+    public void set_otherUser(User _otherUser) {
+        this._otherUser = _otherUser;
+    }
 }

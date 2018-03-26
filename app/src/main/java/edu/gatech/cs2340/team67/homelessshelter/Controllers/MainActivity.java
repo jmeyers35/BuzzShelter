@@ -5,18 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
+    Model modelUser;
+    Model modelShelter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+        modelUser = Model.getInstance();
+        modelShelter = Model.getInstance();
     }
 
 
@@ -34,5 +40,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void buttonResCallBack(View view) {
+        //This will crash-----------
+        /**
+        modelUser.get_otherUser().setHasClaimedBed(false);
+        modelUser.get_otherUser().setNumBedsClaimed(0);
+        String updateVacancy = modelShelter.getShelterByName().getVacancy();
+        long updateVacancyNum = Integer.parseInt(updateVacancy);
+        updateVacancyNum = updateVacancyNum + modelUser.get_otherUser().getNumBedsClaimed();
+        modelShelter.getShelterByName().setVacancy(Long.toString(updateVacancyNum));
+         **/
+        Toast.makeText(getBaseContext(), "All previous reservations have been cancelled"
+                + " beds reserved", Toast.LENGTH_LONG).show(); //This toast doesn't show
+    }
 
 }
