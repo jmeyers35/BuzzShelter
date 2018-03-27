@@ -42,20 +42,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonResCallBack(View view) {
-        //This will crash-----------
-        Log.d("aaa", "user: " + modelUser.getCurrUserInfo());
-        long oldReservations = modelUser.getCurrUserInfo().getNumBedsClaimed();
-        modelUser.getCurrUserInfo().setHasClaimedBed(false);
-        modelUser.getCurrUserInfo().setNumBedsClaimed(0);
-        Log.d("aaa", "shelter: " + modelShelter.get_currentShelterInfo());
-        String updateVacancy = modelShelter.get_currentShelterInfo().getVacancy();
-        long updateVacancyNum = Integer.parseInt(updateVacancy);
-        if (modelUser.getCurrUserInfo().getNumBedsClaimed() == 0) {
-            updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
-            modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
+        if (modelUser.getCurrUserInfo().getShelterClaimed() == null) {
+            Toast.makeText(getBaseContext(), "You haven't reserved any " +
+                    "beds!", Toast.LENGTH_LONG).show();
+        } else {
+            //This will crash-----------
+            Log.d("aaa", "user: " + modelUser.getCurrUserInfo());
+            long oldReservations = modelUser.getCurrUserInfo().getNumBedsClaimed();
+            modelUser.getCurrUserInfo().setHasClaimedBed(false);
+            modelUser.getCurrUserInfo().setNumBedsClaimed(0);
+            modelUser.getCurrUserInfo().setShelterClaimed(null);
+            Log.d("aaa", "shelter: " + modelShelter.get_currentShelterInfo());
+            String updateVacancy = modelUser.getCurrUserInfo().getShelterClaimed().getVacancy();
+            long updateVacancyNum = Integer.parseInt(updateVacancy);
+            if (modelUser.getCurrUserInfo().getNumBedsClaimed() == 0) {
+                updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
+                modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
+            }
+            modelUser.updateUser(modelUser.getCurrUserInfo());
+            Toast.makeText(getBaseContext(), "All previous reservations have been cancelled"
+                    + " beds reserved", Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(getBaseContext(), "All previous reservations have been cancelled"
-                + " beds reserved", Toast.LENGTH_LONG).show();
     }
 
 }

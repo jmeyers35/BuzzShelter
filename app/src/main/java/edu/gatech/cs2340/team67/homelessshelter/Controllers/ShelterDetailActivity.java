@@ -105,37 +105,51 @@ public class ShelterDetailActivity extends AppCompatActivity {
                 // This causes errors -------------------------------------------------------------
                 Log.d("aaa", "In spinner handler");
                 thisShelter = _model.getShelterByName(getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
-                int number = Integer.parseInt(adapterView.getItemAtPosition(i).toString());
-                if (number > Integer.parseInt(thisShelter.getVacancy())) {
-                    Toast.makeText(getBaseContext(), "Not enough beds at this shelter",
-                            Toast.LENGTH_LONG).show();
-                }
-                Log.d("aaa", "model:" + thisUser);
-                Log.d("aaa", "user:" + thisUser.getCurrUserInfo());
-                if (thisUser.getCurrUserInfo().getNumBedsClaimed() != 0) {
-                    Toast.makeText(getBaseContext(), "Please cancel your previous "
-                                    + "reservations if you wish to reserve a bed at this shelter.",
+                if (thisShelter.getVacancy().equals("none given")) {
+                    Toast.makeText(getBaseContext(), "There is no information " +
+                            "available for this shelter. Please visit the shelter to" +
+                            "stay here.", Toast.LENGTH_LONG).show();
+                } else if (thisShelter.getVacancy().split(" ").length > 1) {
+                    Toast.makeText(getBaseContext(), "This shelter has different capacites" +
+                                    "for different situations. Please visit them to " +
+                                    "make a reservation.",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    thisUser.getCurrUserInfo().setHasClaimedBed(true);
-                    thisUser.updateUser(thisUser.getCurrUserInfo());
-                    int oldVacancy = Integer.parseInt(thisShelter.getVacancy());
-                    long newVacancy = oldVacancy - adapterView.getItemIdAtPosition(i);
-                    if (Integer.parseInt(thisShelter.getVacancy()) > 0) {
-                        thisShelter.setVacancy(Long.toString(newVacancy));
-                        thisUser.getCurrUserInfo().setNumBedsClaimed(newVacancy - oldVacancy);
-                        Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
-                                + " beds reserved", Toast.LENGTH_LONG).show();
+
+
+                    int number = Integer.parseInt(adapterView.getItemAtPosition(i).toString());
+                    if (number > Integer.parseInt(thisShelter.getVacancy())) {
+                        Toast.makeText(getBaseContext(), "Not enough beds at this shelter",
+                                Toast.LENGTH_LONG).show();
                     }
-                    thisUser.updateShelter(thisShelter);
-                    thisUser.updateUser(thisUser.getCurrUserInfo());
+                    Log.d("aaa", "model:" + thisUser);
+                    Log.d("aaa", "user:" + thisUser.getCurrUserInfo());
+                    if (thisUser.getCurrUserInfo().getNumBedsClaimed() != 0) {
+                        Toast.makeText(getBaseContext(), "Please cancel your previous "
+                                        + "reservations if you wish to reserve a bed at this shelter.",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        thisUser.getCurrUserInfo().setHasClaimedBed(true);
+                        thisUser.updateUser(thisUser.getCurrUserInfo());
+                        int oldVacancy = Integer.parseInt(thisShelter.getVacancy());
+                        long newVacancy = oldVacancy - adapterView.getItemIdAtPosition(i);
+                        if (Integer.parseInt(thisShelter.getVacancy()) > 0) {
+                            thisShelter.setVacancy(Long.toString(newVacancy));
+                            thisUser.getCurrUserInfo().setNumBedsClaimed(newVacancy - oldVacancy);
+                            Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
+                                    + " beds reserved", Toast.LENGTH_LONG).show();
+                        }
+                        thisUser.getCurrUserInfo().setShelterClaimed(thisShelter);
+                        thisUser.updateShelter(thisShelter);
+                        thisUser.updateUser(thisUser.getCurrUserInfo());
 //                    Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
 //                            + " beds reserved", Toast.LENGTH_LONG).show();
-                }
-                //---------------------------------------------------------------------------------
+                    }
+                    //---------------------------------------------------------------------------------
 
 //                Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
 //                        + " beds reserved", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

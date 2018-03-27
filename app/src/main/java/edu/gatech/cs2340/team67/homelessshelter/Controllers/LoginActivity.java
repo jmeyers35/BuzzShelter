@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         final Intent intent = new Intent(this, MainActivity.class);
+        final String femail = email;
 
         // START SIGN-IN PROCESS
         Log.d("aaa", "calling firebase auth");
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                             Model _model = Model.getInstance();
                             Log.d("aaa", "Setting current user: " + mAuth.getCurrentUser());
                             model.setUser(mAuth.getCurrentUser());
+                            model.setCurrUserInfo(model.findUserByEmail(femail));
                             startActivity(intent);
                         } else {
                             Log.d(TAG, "emailLogin: fail");

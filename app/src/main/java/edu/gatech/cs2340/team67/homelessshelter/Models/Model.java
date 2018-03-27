@@ -56,6 +56,9 @@ public class Model {
 
     public User findUserByEmail(String email) {
         for (User u: _users) {
+            if (u.getUsername() == null) {
+                continue;
+            }
             if (u.getUsername().equals(email)) {
                 return u;
             }
@@ -90,7 +93,7 @@ public class Model {
     }
 
     public void updateShelter(Shelter shelter) {
-        DatabaseReference shelters = _database.getReference("Shelters");
+        DatabaseReference shelters = _database.getReference("shelters");
         shelters.child(Integer.toString(shelter.getId())).setValue(shelter);
     }
 
@@ -123,13 +126,15 @@ public class Model {
     public ArrayList<Shelter> getShelters() {return _shelters;}
     public void setUser(FirebaseUser user ) {
         _currentUser = user;
-        _currUserInfo = new User(user.getDisplayName(),false, false,0);
     }
     public void setUserInfo(User user) {
         _currUserInfo = user;
     }
     public User getCurrUserInfo() {
         return _currUserInfo;
+    }
+    public void setCurrUserInfo(User user) {
+        _currUserInfo = user;
     }
 
 

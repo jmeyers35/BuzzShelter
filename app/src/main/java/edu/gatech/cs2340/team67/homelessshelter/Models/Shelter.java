@@ -19,6 +19,8 @@ public class Shelter {
     private String phoneNumber;
 
 
+    public Shelter() {}
+
     public Shelter(int id, String name, String capacity, String vacancy, String restrictions, double longitude, double latitude,
                    String address, String phoneNumber) {
         this.id = id;
