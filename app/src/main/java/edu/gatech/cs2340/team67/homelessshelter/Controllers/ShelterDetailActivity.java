@@ -112,7 +112,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                 }
                 Log.d("aaa", "model:" + thisUser);
                 Log.d("aaa", "user:" + thisUser.getCurrUserInfo());
-                if (thisUser.getCurrUserInfo().getHasClaimedBed()) {
+                if (thisUser.getCurrUserInfo().getNumBedsClaimed() != 0) {
                     Toast.makeText(getBaseContext(), "Please cancel your previous "
                                     + "reservations if you wish to reserve a bed at this shelter.",
                             Toast.LENGTH_LONG).show();
@@ -121,12 +121,16 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     thisUser.updateUser(thisUser.getCurrUserInfo());
                     int oldVacancy = Integer.parseInt(thisShelter.getVacancy());
                     long newVacancy = oldVacancy - adapterView.getItemIdAtPosition(i);
-                    thisShelter.setVacancy(Long.toString(newVacancy));
+                    if (Integer.parseInt(thisShelter.getVacancy()) > 0) {
+                        thisShelter.setVacancy(Long.toString(newVacancy));
+                        thisUser.getCurrUserInfo().setNumBedsClaimed(newVacancy - oldVacancy);
+                        Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
+                                + " beds reserved", Toast.LENGTH_LONG).show();
+                    }
                     thisUser.updateShelter(thisShelter);
-                    thisUser.getCurrUserInfo().setNumBedsClaimed(newVacancy - oldVacancy);
                     thisUser.updateUser(thisUser.getCurrUserInfo());
-                    Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
-                            + " beds reserved", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
+//                            + " beds reserved", Toast.LENGTH_LONG).show();
                 }
                 //---------------------------------------------------------------------------------
 

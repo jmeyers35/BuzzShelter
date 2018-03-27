@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d("aaa", "shelter: " + modelShelter.get_currentShelterInfo());
         String updateVacancy = modelShelter.get_currentShelterInfo().getVacancy();
         long updateVacancyNum = Integer.parseInt(updateVacancy);
-        updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
-        modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
+        if (modelUser.getCurrUserInfo().getNumBedsClaimed() == 0) {
+            updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
+            modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
+        }
         Toast.makeText(getBaseContext(), "All previous reservations have been cancelled"
                 + " beds reserved", Toast.LENGTH_LONG).show();
     }
