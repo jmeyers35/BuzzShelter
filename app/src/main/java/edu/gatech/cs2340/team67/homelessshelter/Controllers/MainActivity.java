@@ -49,16 +49,19 @@ public class MainActivity extends AppCompatActivity {
             //This will crash-----------
             Log.d("aaa", "user: " + modelUser.getCurrUserInfo());
             long oldReservations = modelUser.getCurrUserInfo().getNumBedsClaimed();
-            modelUser.getCurrUserInfo().setHasClaimedBed(false);
-            modelUser.getCurrUserInfo().setNumBedsClaimed(0);
-            modelUser.getCurrUserInfo().setShelterClaimed(null);
+
             Log.d("aaa", "shelter: " + modelShelter.get_currentShelterInfo());
             String updateVacancy = modelUser.getCurrUserInfo().getShelterClaimed().getVacancy();
             long updateVacancyNum = Integer.parseInt(updateVacancy);
-            if (modelUser.getCurrUserInfo().getNumBedsClaimed() == 0) {
-                updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
-                modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
-            }
+            //reset shelter
+            updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
+            modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
+            modelUser.updateShelter(modelShelter.get_currentShelterInfo());
+            //reset user
+            modelUser.getCurrUserInfo().setHasClaimedBed(false);
+            modelUser.getCurrUserInfo().setNumBedsClaimed(0);
+            modelUser.getCurrUserInfo().setShelterClaimed(null);
+            //update on firebase
             modelUser.updateUser(modelUser.getCurrUserInfo());
             Toast.makeText(getBaseContext(), "All previous reservations have been cancelled"
                     + " beds reserved", Toast.LENGTH_LONG).show();

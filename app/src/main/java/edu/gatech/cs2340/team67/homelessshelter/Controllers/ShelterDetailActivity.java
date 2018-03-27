@@ -133,7 +133,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                         thisUser.updateUser(thisUser.getCurrUserInfo());
                         int oldVacancy = Integer.parseInt(thisShelter.getVacancy());
                         long newVacancy = oldVacancy - adapterView.getItemIdAtPosition(i);
-                        if (Integer.parseInt(thisShelter.getVacancy()) > 0) {
+                        if (newVacancy > 0) {
                             thisShelter.setVacancy(Long.toString(newVacancy));
                             thisUser.getCurrUserInfo().setNumBedsClaimed(newVacancy - oldVacancy);
                             Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
