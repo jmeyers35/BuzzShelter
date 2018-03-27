@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextPassword;
     CheckBox checkBoxAdminStatus;
     FirebaseAuth mAuth;
-    FirebaseDatabase mDatabase;
     Model model = Model.getInstance();
 
 
@@ -75,7 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail: success");
                             showSuccessMessage();
-                            model.addUser(femail, fisAdmin, false);
+                            User user = new User(femail, fisAdmin, false);
+                            model.addUser(femail, fisAdmin);
+                            model.setUserInfo(user);
                             startActivity(intent);
                         }
                     }

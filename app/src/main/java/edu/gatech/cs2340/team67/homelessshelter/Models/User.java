@@ -11,15 +11,15 @@ public class User {
     private boolean isAdmin; //true if admin, false if not
     private long numBedsClaimed;
     private boolean hasClaimedBed; //true if user has claimed a bed, false otherwise
+    private String shelterClaimed;
 
     public User() {}
 
-    public User(String username, boolean isAdmin, boolean hasClaimedBed, long numBedsClaimed) {
+    public User(String username, boolean isAdmin, boolean hasClaimedBed) {
         this.username = username;
         uid++;
         this.isAdmin = isAdmin;
         this.hasClaimedBed = hasClaimedBed;
-        this.numBedsClaimed = numBedsClaimed;
     }
 
     public String getUsername() { return username; }
@@ -28,6 +28,7 @@ public class User {
     public void setHasClaimedBed(boolean hasClaimedBed) {
         this.hasClaimedBed = hasClaimedBed;
     }
+    public int getUid() {return uid;}
 
     public long getNumBedsClaimed() {
         return numBedsClaimed;
@@ -35,5 +36,13 @@ public class User {
 
     public void setNumBedsClaimed(long numBedsClaimed) {
         this.numBedsClaimed = numBedsClaimed;
+    }
+
+    public String getShelterClaimed() {
+        return shelterClaimed;
+    }
+
+    public void setShelterClaimed(String shelterClaimed) {
+        this.shelterClaimed = shelterClaimed;
     }
 }

@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         signIn(email, password);
-        model.setUser(mAuth.getCurrentUser());
+
     }
 
 
@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, MainActivity.class);
 
         // START SIGN-IN PROCESS
+        final String femail = email;
 
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -69,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             Log.d(TAG, "emailLogin: success");
+                            model.setUser(mAuth.getCurrentUser());
+                            model.setUserInfo(model.findUserByEmail(femail));
                             startActivity(intent);
                         } else {
                             Log.d(TAG, "emailLogin: fail");
