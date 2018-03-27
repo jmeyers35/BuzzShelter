@@ -9,7 +9,11 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 /**
@@ -19,6 +23,11 @@ import edu.gatech.cs2340.team67.homelessshelter.R;
  * in a {@link ShelterListActivity}.
  */
 public class ShelterDetailActivity extends AppCompatActivity {
+
+    /**
+     * Represents the shelter the user is viewing.
+     */
+    private Shelter thisShelter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,15 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     .add(R.id.shelter_detail_container, fragment)
                     .commit();
         }
+
+        Spinner numBeds = (Spinner) findViewById(R.id.numBeds);
+        // Create array adapter using string array and a default spinner layout
+        ArrayAdapter<CharSequence> bedsAdapter = ArrayAdapter.createFromResource(this,
+                R.array.numBeds_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the number of beds appears
+        bedsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        numBeds.setAdapter(bedsAdapter);
     }
 
     @Override
@@ -80,4 +98,6 @@ public class ShelterDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

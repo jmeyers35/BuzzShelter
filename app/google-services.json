@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "813691827577-dnvjn63fkjgijccskr58fik4a1r3daui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.cs2340.team67.homelessshelter",
+            "certificate_hash": "a3ca4a6e307ad589bd0b2cf1de02e4faf41c0694"
+          }
+        },
+        {
           "client_id": "813691827577-p4n8nf5pjtb27p7526p1fc3bkjr6qjhk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

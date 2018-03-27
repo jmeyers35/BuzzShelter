@@ -40,6 +40,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.gatech.cs2340.team67.homelessshelter.Controllers.ShelterListActivity" />
+            <!-- This was suggested by stack overflow -->
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_TICK" />
+            </intent-filter>
         </activity>
     </application>
 
