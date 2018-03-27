@@ -11,7 +11,7 @@ public class User {
     private boolean isAdmin; //true if admin, false if not
     private long numBedsClaimed;
     private boolean hasClaimedBed; //true if user has claimed a bed, false otherwise
-    private String shelterClaimed;
+    private Shelter shelterClaimed;
 
     public User() {}
 
@@ -38,11 +38,11 @@ public class User {
         this.numBedsClaimed = numBedsClaimed;
     }
 
-    public String getShelterClaimed() {
+    public Shelter getShelterClaimed() {
         return shelterClaimed;
     }
 
-    public void setShelterClaimed(String shelterClaimed) {
+    public void setShelterClaimed(Shelter shelterClaimed) {
         this.shelterClaimed = shelterClaimed;
     }
 }

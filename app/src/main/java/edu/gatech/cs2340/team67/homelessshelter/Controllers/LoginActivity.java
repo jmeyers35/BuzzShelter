@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private FirebaseAuth mAuth;
-    private Model model = Model.getInstance();
+    private Model model;
 
 
     @Override
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
+        model = Model.getInstance();
 
         editTextUsername = (EditText)findViewById(R.id.editTextUsername);
         editTextPassword = (EditText)findViewById(R.id.editTextPassword);
@@ -40,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void buttonLoginCallback(View view) {
-        Model _model = Model.getInstance();
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         signIn(email, password);

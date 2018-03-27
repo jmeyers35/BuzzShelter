@@ -58,19 +58,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
             }
         });
-
-        DatabaseReference shelters = db.getReference("shelters");
-        shelters.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                model.loadShelters(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override

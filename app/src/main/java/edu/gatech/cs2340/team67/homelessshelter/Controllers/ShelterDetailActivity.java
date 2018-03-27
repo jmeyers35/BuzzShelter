@@ -12,7 +12,9 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
@@ -28,6 +30,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
      * Represents the shelter the user is viewing.
      */
     private Shelter thisShelter;
+    private Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shelter_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
+        model = Model.getInstance();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +54,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        thisShelter = model.getShelterByName(getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -97,6 +102,37 @@ public class ShelterDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void reserve(View view) {
+        if (thisShelter.getVacancy().equals("none given")) {
+            Toast.makeText(getApplicationContext(), "There is no vacancy information available" +
+                    "for this shelter. Please visit or call them", Toast.LENGTH_SHORT).show();
+        } else if (thisShelter.getVacancy().split(" ").length > 1) {
+            Toast.makeText(getApplicationContext(), "This shelter has " +
+                    "different capacities for different situations. Please" +
+                    "visit them for more info", Toast.LENGTH_SHORT).show();
+        } else {
+            Spinner spinner = findViewById(R.id.numBeds);
+            int beds = (Integer) spinner.getSelectedItem();
+            int vacancy = Integer.parseInt(thisShelter.getVacancy());
+            int newVacancy = vacancy - beds;
+            if (newVacancy < 0) {
+                Toast.makeText(getApplicationContext(), "Sorry! Reserving this" +
+                                "number of beds will place the shelter over capacity.",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                thisShelter.setVacancy(Integer.toString(newVacancy));
+                model.updateShelter(thisShelter);
+                model.getCurrUserInfo().setShelterClaimed(thisShelter);
+                model.getCurrUserInfo().setHasClaimedBed(true);
+                model.getCurrUserInfo().setNumBedsClaimed(beds);
+                model.updateUser(model.getCurrUserInfo());
+                Toast.makeText(getApplicationContext(), "You've successfully reserved these beds!",
+                        Toast.LENGTH_SHORT);
+            }
+        }
+
     }
 
 

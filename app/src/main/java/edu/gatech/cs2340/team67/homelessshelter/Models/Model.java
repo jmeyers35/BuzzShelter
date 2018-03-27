@@ -43,7 +43,6 @@ public class Model {
 
     private Model(){
         _users = new ArrayList<>();
-        _currentUser = null;
         _shelters = new ArrayList<>();
         _database = FirebaseDatabase.getInstance();
     }
@@ -108,7 +107,7 @@ public class Model {
                 return s;
             }
         }
-        return new Shelter(0, "error", "","", "",0,0,"", "" ); //blank shelter
+        throw new NoSuchElementException();
     }
 
 
@@ -157,9 +156,6 @@ public class Model {
             Shelter shelter = new Shelter(id, name, capacity, vacancy, restrictions, longitude,
                     latitude,address,phoneNumber);
            _shelters.add(shelter);
-
-//           DatabaseReference shelters = _database.getReference("shelters");
-//           shelters.child(Integer.toString(id)).setValue(shelter);
 
         }
 
