@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.Models.User;
@@ -74,7 +75,10 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail: success");
                             showSuccessMessage();
+                            User user = new User(femail, fisAdmin, false, 0);
                             model.addUser(femail, fisAdmin, false, 0);
+                            model.setUser((FirebaseUser) task.getResult().getUser());
+                            model.setUserInfo(user);
                             startActivity(intent);
                         }
                     }

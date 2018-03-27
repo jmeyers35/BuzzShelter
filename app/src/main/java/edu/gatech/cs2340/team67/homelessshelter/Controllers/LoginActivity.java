@@ -40,11 +40,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void buttonLoginCallback(View view) {
-        Model _model = Model.getInstance();
+        Log.d("aaa", "In logoin button handler");
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         signIn(email, password);
-        model.setUser(mAuth.getCurrentUser());
+
     }
 
 
@@ -62,13 +62,16 @@ public class LoginActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, MainActivity.class);
 
         // START SIGN-IN PROCESS
-
+        Log.d("aaa", "calling firebase auth");
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             Log.d(TAG, "emailLogin: success");
+                            Model _model = Model.getInstance();
+                            Log.d("aaa", "Setting current user: " + mAuth.getCurrentUser());
+                            model.setUser(mAuth.getCurrentUser());
                             startActivity(intent);
                         } else {
                             Log.d(TAG, "emailLogin: fail");
@@ -97,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             editTextPassword.setError(null);
         }
+        Log.d("aaa", "validate returns: " + valid);
 
         return valid;
     }

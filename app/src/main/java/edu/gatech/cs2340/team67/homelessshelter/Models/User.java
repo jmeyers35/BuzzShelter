@@ -11,6 +11,7 @@ public class User {
     private boolean isAdmin; //true if admin, false if not
     private boolean hasClaimedBed; //true if user has claimed a bed, false otherwise
     private long numBedsClaimed;
+    private String shelterClaimed;
 
 
     public User(String username, boolean isAdmin, boolean hasClaimedBed, long numBedsClaimed) {
@@ -22,8 +23,12 @@ public class User {
     }
 
     public String getUsername() { return username; }
+    public int getUid() {return uid;}
     public boolean getAdminStatus() { return isAdmin; }
-    public boolean getHasClaimedBed() { return hasClaimedBed; }
+    public boolean getHasClaimedBed() {
+        //return hasClaimedBed;
+        return numBedsClaimed >0;
+    }
     public void setHasClaimedBed(boolean hasClaimedBed) {
         this.hasClaimedBed = hasClaimedBed;
     }
@@ -34,5 +39,10 @@ public class User {
 
     public void setNumBedsClaimed(long numBedsClaimed) {
         this.numBedsClaimed = numBedsClaimed;
+    }
+
+    @Override
+    public String toString() {
+        return username + " " + numBedsClaimed + " " + hasClaimedBed;
     }
 }

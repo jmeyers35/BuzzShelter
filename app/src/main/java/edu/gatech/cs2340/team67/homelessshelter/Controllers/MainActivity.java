@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -42,16 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonResCallBack(View view) {
         //This will crash-----------
-        /**
-        modelUser.get_otherUser().setHasClaimedBed(false);
-        modelUser.get_otherUser().setNumBedsClaimed(0);
-        String updateVacancy = modelShelter.getShelterByName().getVacancy();
+        Log.d("aaa", "user: " + modelUser.getCurrUserInfo());
+        long oldReservations = modelUser.getCurrUserInfo().getNumBedsClaimed();
+        modelUser.getCurrUserInfo().setHasClaimedBed(false);
+        modelUser.getCurrUserInfo().setNumBedsClaimed(0);
+        Log.d("aaa", "shelter: " + modelShelter.get_currentShelterInfo());
+        String updateVacancy = modelShelter.get_currentShelterInfo().getVacancy();
         long updateVacancyNum = Integer.parseInt(updateVacancy);
-        updateVacancyNum = updateVacancyNum + modelUser.get_otherUser().getNumBedsClaimed();
-        modelShelter.getShelterByName().setVacancy(Long.toString(updateVacancyNum));
-         **/
+        updateVacancyNum = updateVacancyNum + Math.abs(oldReservations);
+        modelShelter.get_currentShelterInfo().setVacancy(Long.toString(updateVacancyNum));
         Toast.makeText(getBaseContext(), "All previous reservations have been cancelled"
-                + " beds reserved", Toast.LENGTH_LONG).show(); //This toast doesn't show
+                + " beds reserved", Toast.LENGTH_LONG).show();
     }
 
 }

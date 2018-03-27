@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
@@ -47,9 +48,9 @@ public class ShelterDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
+        thisUser = Model.getInstance();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +87,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     .add(R.id.shelter_detail_container, fragment)
                     .commit();
         }
+        Log.d("aaa", "getting spinner");
 
         Spinner numBeds = findViewById(R.id.numBeds);
         // Create array adapter using string array and a default spinner layout
@@ -95,43 +97,41 @@ public class ShelterDetailActivity extends AppCompatActivity {
         bedsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         numBeds.setAdapter(bedsAdapter);
+        Log.d("aaa", "setting the listyrener");
         numBeds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 // Gets the shelter object that the user clicked on
                 // This causes errors -------------------------------------------------------------
-                /**
-                Bundle arguments = new Bundle();
-                arguments.putString(ShelterDetailFragment.ARG_ITEM_ID,
-                        getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
-                ShelterDetailFragment fragment = new ShelterDetailFragment();
-                fragment.setArguments(arguments);
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.shelter_detail_container, fragment)
-                        .commit();
-                thisShelter = _model.getShelterByName(fragment.getArguments().getString(ARG_ITEM_ID));
+                Log.d("aaa", "In spinner handler");
+                thisShelter = _model.getShelterByName(getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
                 int number = Integer.parseInt(adapterView.getItemAtPosition(i).toString());
                 if (number > Integer.parseInt(thisShelter.getVacancy())) {
                     Toast.makeText(getBaseContext(), "Not enough beds at this shelter",
                             Toast.LENGTH_LONG).show();
                 }
-                if (thisUser.get_otherUser().getHasClaimedBed()) {
+                Log.d("aaa", "model:" + thisUser);
+                Log.d("aaa", "user:" + thisUser.getCurrUserInfo());
+                if (thisUser.getCurrUserInfo().getHasClaimedBed()) {
                     Toast.makeText(getBaseContext(), "Please cancel your previous "
                                     + "reservations if you wish to reserve a bed at this shelter.",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    thisUser.get_otherUser().setHasClaimedBed(true);
+                    thisUser.getCurrUserInfo().setHasClaimedBed(true);
+                    thisUser.updateUser(thisUser.getCurrUserInfo());
                     int oldVacancy = Integer.parseInt(thisShelter.getVacancy());
                     long newVacancy = oldVacancy - adapterView.getItemIdAtPosition(i);
                     thisShelter.setVacancy(Long.toString(newVacancy));
-                    thisUser.get_otherUser().setNumBedsClaimed(newVacancy - oldVacancy);
+                    thisUser.updateShelter(thisShelter);
+                    thisUser.getCurrUserInfo().setNumBedsClaimed(newVacancy - oldVacancy);
+                    thisUser.updateUser(thisUser.getCurrUserInfo());
                     Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
                             + " beds reserved", Toast.LENGTH_LONG).show();
                 }
                 //---------------------------------------------------------------------------------
-                **/
-                Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
-                        + " beds reserved", Toast.LENGTH_LONG).show();
+
+//                Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i)
+//                        + " beds reserved", Toast.LENGTH_LONG).show();
             }
 
             @Override
