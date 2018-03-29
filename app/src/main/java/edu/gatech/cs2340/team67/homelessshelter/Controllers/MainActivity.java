@@ -33,4 +33,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void mapCallBack(View view) {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+
+    }
 }

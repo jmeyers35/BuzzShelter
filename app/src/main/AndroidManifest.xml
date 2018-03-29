@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.gatech.cs2340.team67.homelessshelter">
 
+
+    <!-- Requesting permission to access location from the user-->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Controllers.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +23,41 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Add a Map Activity-->
+
+        <!--
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="8.3.0" />
+        -->
+        <!-- Gets the api key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDSn_8uoNrhmyyZgN16R86-9Uk0QHKOkV4" />
+
+        <activity
+            android:name=".Controllers.MapActivity"
+            android:label="@string/title_map">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+
+        </activity>
+
+        <!--Requesting users location
+
+        <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+            package="com.example.currentplacedetailsonmap">
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        </manifest>
+
+        -->
+
+
+        <!-- End of Map Activity-->
+
         <activity
             android:name=".Controllers.LoginActivity"
             android:parentActivityName=".Controllers.WelcomeActivity" />
@@ -23,6 +65,7 @@
             android:name=".Controllers.RegisterActivity"
             android:parentActivityName=".Controllers.WelcomeActivity" />
         <activity android:name=".Controllers.MainActivity" />
+
         <activity
             android:name=".Controllers.ShelterListActivity"
             android:label="@string/title_shelter_list"

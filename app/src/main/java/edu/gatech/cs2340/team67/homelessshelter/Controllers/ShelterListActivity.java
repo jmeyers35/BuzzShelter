@@ -238,10 +238,5 @@ public class ShelterListActivity extends AppCompatActivity {
             };
         }
 
-
-
-
-
-
     }
 }
