@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.team67.homelessshelter.Controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +10,13 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
+import edu.gatech.cs2340.team67.homelessshelter.Models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 /**
@@ -19,6 +26,9 @@ import edu.gatech.cs2340.team67.homelessshelter.R;
  * in a {@link ShelterListActivity}.
  */
 public class ShelterDetailActivity extends AppCompatActivity {
+    private Spinner numberBedsSpinner;
+    private Shelter selectedShelter;
+    private Model _model = Model.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +36,18 @@ public class ShelterDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shelter_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
+
+        selectedShelter = _model.getShelterByName(getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
+
+        numberBedsSpinner = (Spinner)findViewById(R.id.numberBeds_spinner);
+        Integer[] bedVacancyNumbers = new Integer[Shelter.MAX_RESRERVATION];
+        for (int i = 0; i <= Shelter.MAX_RESRERVATION; i++) {
+            bedVacancyNumbers[i] = i;
+        }
+        ArrayAdapter<Integer> adapterSpinner = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, bedVacancyNumbers);
+        numberBedsSpinner.setAdapter(adapterSpinner);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,4 +102,39 @@ public class ShelterDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*
+    * Callback for reserving beds with spinner and button
+    * @param view the view
+    *
+    */
+    public void buttonNumBedsCallback(View view) {
+        int requestedBeds = Integer.parseInt(numberBedsSpinner.getSelectedItem().toString());
+        User currentUser = _model.getCurrentUser();
+
+        Context context = getApplicationContext();
+        CharSequence text;
+        int duration = Toast.LENGTH_SHORT;
+
+        if(requestedBeds == 0) {
+            text = "You must reserve at least 1 bed";
+        } else {
+            try {
+                if (currentUser.reserveBeds(requestedBeds, selectedShelter)) {
+                    text = requestedBeds + " beds reserved";
+                } else {
+                    if (currentUser.hasReservation()) {
+                        text = "Please clear other reservations first";
+                    } else {
+                        text = "Please request fewer than " + Shelter.MAX_RESRERVATION + " beds";
+                    }
+                }
+            } catch (NumberFormatException nfe) {
+                text = "Online reservations not supported here. Please call the Shelter to make a reservation";
+            }
+        }
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
 }

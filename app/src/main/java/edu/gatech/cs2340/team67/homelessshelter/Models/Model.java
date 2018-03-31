@@ -27,7 +27,8 @@ public class Model {
     /** holds the list of all users */
     private List<User> _users;
 
-    private FirebaseUser _currentUser; //logged in user
+
+    private User _currentUser;
 
     private ArrayList<Shelter> _shelters;
 
@@ -62,17 +63,19 @@ public class Model {
                 return s;
             }
         }
+        //#TODO: make this throw error if no shelter found!
         return new Shelter(0, "error", "","",0,0,"", "" ); //blank shelter
     }
 
 
 
     public List getUsers(){ return _users; }
-    public FirebaseUser getCurrentUser() {return _currentUser; }
     public ArrayList<Shelter> getShelters() {return _shelters;}
     public void setUser(FirebaseUser user ) {
         _currentUser = user;
     }
+    public User getCurrentUser() { return _currentUser; }
+
 
 
     /**

@@ -72,6 +72,15 @@ public class ShelterDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.phoneNumber)).setText(mItem.getPhoneNumber());
         }
 
+        /* #TODO: might need this type code here!
+                User currentUser = _model.getCurrentUser();
+        if (currentUser.hasReservation()) {
+           if (currentUser.getReservedShelter().equals(selectedShelter)) {
+               numberBedsSpinner.setSelection(((ArrayAdapter)numberBedsSpinner.getAdapter()).getPosition(Integer.toString(currentUser.getReservedBedsNumber())));
+           }
+        }
+        */
+
         return rootView;
     }
 }
