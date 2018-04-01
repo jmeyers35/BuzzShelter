@@ -96,6 +96,11 @@ public class Model {
         throw new NoSuchElementException("Cannot find user with this email");
     }
 
+    /*
+      * Loads users from database
+      * @param ds datasnapshot
+      *
+      */
     public void loadUsers(DataSnapshot ds) {
         if (_users.isEmpty()) {
             for (DataSnapshot data : ds.getChildren()) {
@@ -105,6 +110,11 @@ public class Model {
         }
     }
 
+    /*
+      * Loads shelters from database
+      * @param ds datasnapshot
+      *
+      */
     public void loadShelters(DataSnapshot ds) {
         if (_shelters.isEmpty()) {
             for (DataSnapshot data : ds.getChildren()) {
@@ -112,6 +122,26 @@ public class Model {
                 _shelters.add(shelter);
             }
         }
+    }
+
+    /*
+     * Updates Shelter in database
+     * @param shelter Shelter reference
+     *
+     */
+    public void updateShelterDatabase(Shelter shelter) {
+        DatabaseReference shelters = _database.getReference("shelters");
+        shelters.child(Integer.toString(shelter.getId())).setValue(shelter);
+    }
+
+    /*
+     * Updates User in database
+     * @param user user reference
+     *
+     */
+    public void updateUserDatabase(User user) {
+        DatabaseReference users = _database.getReference("users");
+        users.child(Integer.toString(user.getUid())).setValue(user);
     }
 
 

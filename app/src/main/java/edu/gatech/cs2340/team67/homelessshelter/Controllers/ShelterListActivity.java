@@ -131,7 +131,7 @@ public class ShelterListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Shelter item = (Shelter) view.getTag();
-                Log.d("ACK", Integer.toString(item.getId())); //debug #todo delete this and its import
+
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(ShelterDetailFragment.ARG_ITEM_ID, item.getName()); //Pass the name to the detail fragment

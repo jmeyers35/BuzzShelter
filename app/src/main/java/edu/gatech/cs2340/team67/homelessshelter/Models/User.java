@@ -35,7 +35,7 @@ public class User {
             if (shelter.reserveVacancy(requestedBeds)) {
                 reservedShelter = shelter;
                 reservedBedsNumber = requestedBeds;
-                //#TODO: update database
+                Model.getInstance().updateUserDatabase(this); //update database
                 return true;
             } else {
                 return false;
@@ -50,10 +50,10 @@ public class User {
     */
     public void clearReservations() {
         if (hasReservation()) {
-            //#TODO: update database
             reservedShelter.clearReservation(reservedBedsNumber);
             reservedBedsNumber = 0;
             reservedShelter = null;
+            Model.getInstance().updateUserDatabase(this); // update database
         }
     }
 

@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
@@ -75,7 +76,6 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     .commit();
         }
 
-
     }
 
     @Override
@@ -95,8 +95,48 @@ public class ShelterDetailActivity extends AppCompatActivity {
     }
 
 
-    public void buttonReservationCallback(View view) {
-        
+    /*
+ * Callback for reserving beds with spinner and button
+ * @param view the view
+ *
+ */
+    public void buttonReserveCallBack(View view) {
+        Spinner vacancySpinner = (Spinner) findViewById(R.id.vacancy_spinner);
+
+        int requestedBeds = Integer.parseInt(vacancySpinner.getSelectedItem().toString());
+        User currentUser = _model.getCurrentUser();
+
+        Context context = getApplicationContext();
+        CharSequence text;
+        int duration = Toast.LENGTH_SHORT;
+
+        if(requestedBeds == 0) {
+            text = "You must reserve at least 1 bed";
+        } else if (requestedBeds > Shelter.MAX_RESRERVATION){
+            text = "Please request fewer than " + Shelter.MAX_RESRERVATION + " beds";
+        } else {
+            try {
+                if (currentUser.reserveBeds(requestedBeds, selectedShelter)) {
+                    text = requestedBeds + " beds reserved";
+                    //update database
+                    _model.updateUserDatabase(currentUser);
+                    _model.updateShelterDatabase(selectedShelter);
+                    //update vacancy text on screen
+                    ((TextView) findViewById(R.id.vacancy)).setText("Vacancy: " + selectedShelter.getVacancy());
+
+                } else {
+                    if (currentUser.hasReservation()) {
+                        text = "Please clear other reservations first";
+                    } else {
+                        text = "Not enough vacancy";
+                    }
+                }
+            } catch (NumberFormatException nfe) {
+                text = "Online reservations not supported here. Please call the Shelter to make a reservation";
+            }
+        }
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 

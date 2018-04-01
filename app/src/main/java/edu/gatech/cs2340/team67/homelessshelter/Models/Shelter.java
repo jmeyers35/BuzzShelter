@@ -52,7 +52,7 @@ public class Shelter {
             //enough space
             vacancy = Integer.toString(numBedsAvailable - numBedsRequested); //#TODO: no need for tostring when capacity is int
 
-            //#TODO: add database backup to here
+            Model.getInstance().updateShelterDatabase(this);// database backup
 
             return true;
         }
@@ -67,6 +67,7 @@ public class Shelter {
     public void clearReservation(int numBedsReserved) {
         int numBedsAvailable = Integer.parseInt(vacancy);
         vacancy = Integer.toString(numBedsReserved + numBedsAvailable); //#TODO: remove toString when capacity is int
+        Model.getInstance().updateShelterDatabase(this); //update database
     }
 
     public int getId() { return id; }
