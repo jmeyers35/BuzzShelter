@@ -2,13 +2,20 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 
 import android.util.Log;
 
+
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
@@ -26,27 +33,27 @@ public class Model {
 
     /** holds the list of all users */
     private List<User> _users;
-
-
     private User _currentUser;
-
-    private ArrayList<Shelter> _shelters;
+    private List<Shelter> _shelters;
+    private FirebaseDatabase _database;
 
     private Model(){
-        _users = new ArrayList<>();
+        _users = new ArrayList<User>();
         _currentUser = null;
-        _shelters = new ArrayList<>();
+        _shelters = new ArrayList<Shelter>();
+        _database = FirebaseDatabase.getInstance();
 
     }
 
     public void addUser(User user) {
+        DatabaseReference dbUsers = _database.getReference("users");
+        dbUsers.child(Integer.toString(user.getUid())).setValue(user);
         _users.add(user);
 
     }
 
     public void addUser(String username, boolean isAdmin) {
-        _users.add(new User(username,isAdmin));
-
+        addUser(new User(username,isAdmin));
     }
 
 
@@ -69,12 +76,43 @@ public class Model {
 
 
 
-    public List getUsers(){ return _users; }
-    public ArrayList<Shelter> getShelters() {return _shelters;}
-    public void setUser(FirebaseUser user ) {
+    public List<User> getUsers(){ return _users; }
+    public List<Shelter> getShelters() {return _shelters;}
+    public void setCurrentUser(User user ) {
         _currentUser = user;
     }
     public User getCurrentUser() { return _currentUser; }
+
+
+    public User findUserByEmail(String email) {
+        for (User u: _users) {
+            if (u.getUsername() == null) {
+                continue;
+            }
+            if (u.getUsername().equals(email)) {
+                return u;
+            }
+        }
+        throw new NoSuchElementException("Cannot find user with this email");
+    }
+
+    public void loadUsers(DataSnapshot ds) {
+        if (_users.isEmpty()) {
+            for (DataSnapshot data : ds.getChildren()) {
+                User user = data.getValue(User.class);
+                _users.add(user);
+            }
+        }
+    }
+
+    public void loadShelters(DataSnapshot ds) {
+        if (_shelters.isEmpty()) {
+            for (DataSnapshot data : ds.getChildren()) {
+                Shelter shelter = data.getValue(Shelter.class);
+                _shelters.add(shelter);
+            }
+        }
+    }
 
 
 

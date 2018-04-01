@@ -20,6 +20,7 @@ public class Shelter {
 
     public static int MAX_RESRERVATION = 10;
 
+    public Shelter(){} //done for firebase database
 
     public Shelter(int id, String name, String capacity, String restrictions, double longitude, double latitude,
                    String address, String phoneNumber) {

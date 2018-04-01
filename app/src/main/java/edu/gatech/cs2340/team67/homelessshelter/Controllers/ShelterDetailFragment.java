@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
@@ -70,16 +72,26 @@ public class ShelterDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.longitudeLatitude)).setText(mItem.getLongitude() + ", " + mItem.getLatitude());
             ((TextView) rootView.findViewById(R.id.address)).setText(mItem.getAddress());
             ((TextView) rootView.findViewById(R.id.phoneNumber)).setText(mItem.getPhoneNumber());
+
+
+            Spinner numberBedsSpinner = (Spinner) rootView.findViewById(R.id.vacancy_spinner);
+            Integer[] spinnerValues = new Integer[Shelter.MAX_RESRERVATION + 1];
+            for (int i = 0; i <= Shelter.MAX_RESRERVATION; i++) {
+                spinnerValues[i] = i;
+            }
+            ArrayAdapter<Integer> spinnerAdapter = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, spinnerValues);
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            numberBedsSpinner.setAdapter(spinnerAdapter);
+
+            if (_model.getCurrentUser().hasReservation()) {
+                if (_model.getCurrentUser().getReservedShelter().equals(mItem)) {
+                    numberBedsSpinner.setSelection(spinnerAdapter.getPosition(_model.getCurrentUser().getReservedBedsNumber()));
+                }
+            }
+
         }
 
-        /* #TODO: might need this type code here!
-                User currentUser = _model.getCurrentUser();
-        if (currentUser.hasReservation()) {
-           if (currentUser.getReservedShelter().equals(selectedShelter)) {
-               numberBedsSpinner.setSelection(((ArrayAdapter)numberBedsSpinner.getAdapter()).getPosition(Integer.toString(currentUser.getReservedBedsNumber())));
-           }
-        }
-        */
 
         return rootView;
     }

@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.Models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         signIn(email, password);
-        model.setUser(mAuth.getCurrentUser());
+        model.setCurrentUser(model.findUserByEmail(email));
     }
 
 
@@ -62,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, MainActivity.class);
 
         // START SIGN-IN PROCESS
-
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

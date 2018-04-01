@@ -48,14 +48,15 @@
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <Spinner
-        android:id="@+id/numberBeds_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/vacancy_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/numBeds_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="buttonNumBedsCallback" />
+        android:id="@+id/numberBedsRequested_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:onClick="buttonReservationCallBack"
+        android:text="Reserve" />
 
 </LinearLayout>

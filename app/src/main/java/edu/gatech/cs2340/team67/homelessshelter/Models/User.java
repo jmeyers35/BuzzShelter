@@ -13,6 +13,7 @@ public class User {
     private Shelter reservedShelter;
     private int reservedBedsNumber;
 
+    public User() {} //done for the firebaseDatabase
 
     public User(String username, boolean isAdmin) {
         this.username = username;
@@ -34,6 +35,7 @@ public class User {
             if (shelter.reserveVacancy(requestedBeds)) {
                 reservedShelter = shelter;
                 reservedBedsNumber = requestedBeds;
+                //#TODO: update database
                 return true;
             } else {
                 return false;
@@ -48,6 +50,7 @@ public class User {
     */
     public void clearReservations() {
         if (hasReservation()) {
+            //#TODO: update database
             reservedShelter.clearReservation(reservedBedsNumber);
             reservedBedsNumber = 0;
             reservedShelter = null;
@@ -60,6 +63,14 @@ public class User {
     public int getReservedBedsNumber() { return reservedBedsNumber; }
     public boolean hasReservation() { return reservedBedsNumber > 0; }
     public int getUid() { return uid; }
+
+
+    //setters for firebase db
+    public void setUsername(String username) { this.username = username; }
+    public void setUid(int id) { this.uid = id; }
+    public void setAdminStatus(boolean isAdmin) { this.isAdmin = isAdmin; }
+    public void setReservedShelter(Shelter shelter) { this.reservedShelter = shelter; }
+    public void setReservedBedsNumber(int numberOfBeds) { this.reservedBedsNumber = numberOfBeds; }
 
 
 
