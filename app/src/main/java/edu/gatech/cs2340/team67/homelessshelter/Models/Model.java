@@ -70,8 +70,7 @@ public class Model {
                 return s;
             }
         }
-        //#TODO: make this throw error if no shelter found!
-        return new Shelter(0, "error", "","",0,0,"", "" ); //blank shelter
+        throw new NoSuchElementException("Shelter: " + name + " not in Model");
     }
 
 
