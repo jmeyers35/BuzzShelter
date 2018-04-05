@@ -3,6 +3,7 @@ package edu.gatech.cs2340.team67.homelessshelter.Controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +47,15 @@ public class ShelterListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
-    private final SimpleItemRecyclerViewAdapter mAdapter = new SimpleItemRecyclerViewAdapter(Model.getInstance().getShelters());
+    private ArrayList<Shelter> mValuesFiltered;
+    public final SimpleItemRecyclerViewAdapter mAdapter =
+            new SimpleItemRecyclerViewAdapter(Model.getInstance().getShelters());
+
+    public ArrayList<Shelter> getMValuesFiltered() {
+        return mValuesFiltered;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +84,24 @@ public class ShelterListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fmap);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+                //Passing in the filter values with Intents
+                Intent mapNavigation = new Intent(
+                        ShelterListActivity.this, MapActivity.class);
+
+                //Iterating through the filtered list and adding them to the intent
+                Bundle lol = new Bundle();
+
+                lol.putParcelableArrayList("Shelters", getMValuesFiltered());
+                mapNavigation.putExtras(lol);
+                startActivity(mapNavigation);
+
+
             }
         });
         // Show the Up button in the action bar.
@@ -125,8 +147,7 @@ public class ShelterListActivity extends AppCompatActivity {
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> implements Filterable {
 
-        private final List<Shelter> mValues;
-        private List<Shelter> mValuesFiltered;
+        private final ArrayList<Shelter> mValues;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,9 +171,9 @@ public class ShelterListActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(List<Shelter> items) {
+        SimpleItemRecyclerViewAdapter(ArrayList<Shelter> items) {
             mValues = items;
-            mValuesFiltered = items;
+            mValuesFiltered = (ArrayList<Shelter>) items;
         }
 
         @Override
@@ -196,7 +217,7 @@ public class ShelterListActivity extends AppCompatActivity {
                     if (charString.isEmpty()) {
                         mValuesFiltered = mValues;
                     } else {
-                        List<Shelter> filteredList = new ArrayList<>();
+                        ArrayList<Shelter> filteredList = new ArrayList<>();
                         for (Shelter row : mValues) {
 
                             // match conditions
@@ -234,6 +255,8 @@ public class ShelterListActivity extends AppCompatActivity {
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     mValuesFiltered = (ArrayList<Shelter>) filterResults.values;
                     notifyDataSetChanged();
+
+                    //calls to UI thread to update the screen
                 }
             };
         }

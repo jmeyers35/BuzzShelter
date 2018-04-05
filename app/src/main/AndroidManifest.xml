@@ -32,17 +32,33 @@
             android:value="8.3.0" />
         -->
         <!-- Gets the api key -->
+        <!--<meta-data-->
+            <!--android:name="com.google.android.geo.API_KEY"-->
+            <!--android:value="AIzaSyDSn_8uoNrhmyyZgN16R86-9Uk0QHKOkV4" />-->
+
+        <!--<activity-->
+            <!--android:name=".Controllers.MapActivity"-->
+            <!--android:label="@string/title_map">-->
+                <!--<intent-filter>-->
+                    <!--<action android:name="android.intent.action.MAIN" />-->
+                    <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--</intent-filter>-->
+
+        <!--</activity>-->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDSn_8uoNrhmyyZgN16R86-9Uk0QHKOkV4" />
 
         <activity
             android:name=".Controllers.MapActivity"
-            android:label="@string/title_map">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            android:label="@string/title_map"
+            android:parentActivityName=".Controllers.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
