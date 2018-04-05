@@ -144,7 +144,7 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
             map.addMarker(
                     new MarkerOptions().position(place).title(
                             filteredValues.get(i).getName()).snippet(
-                                            filteredValues.get(i).getCapacity()));
+                                            "Capacity: " + filteredValues.get(i).getCapacity()));
 
            // map.addMarker(new MarkerOptions().position(place).visible(false));
 
@@ -161,9 +161,7 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
         //Mess with the visibility settings on the
 
-
     }
-
 
 
 
