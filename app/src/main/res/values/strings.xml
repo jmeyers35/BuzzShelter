@@ -17,4 +17,6 @@
     <string name="main_activity_logout_button">Logout</string>
     <string name="title_shelter_list">Shelters</string>
     <string name="title_shelter_detail">Shelter Detail</string>
+    <string name="title_map">Map</string>
+
 </resources>

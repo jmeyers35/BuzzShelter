@@ -50,4 +50,10 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+
+    public void mapCallBack(View view) {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+
+    }
 }
