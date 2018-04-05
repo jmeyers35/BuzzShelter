@@ -1,27 +1,12 @@
 package edu.gatech.cs2340.team67.homelessshelter.Controllers;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
+
 import android.widget.SearchView;
-import android.widget.TextView;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,10 +21,10 @@ import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 
 /**
@@ -103,9 +88,6 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
         toolbar.setTitle(getTitle());
 
 
-        //Take the values from the filter, then extract those and put those on the map.
-
-
     }
 
 
@@ -145,10 +127,6 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
         //This is where the implementation, you have to update the Markers
 
         //Gets the current list of shelters
-        if (filteredValues == null) {
-            ArrayList<Shelter> filteredValues = getMValuesFiltered();
-        }
-
 
 
         HashMap <LatLng, Integer> visibilityMap = new HashMap<>();
@@ -165,12 +143,12 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
             map.addMarker(
                     new MarkerOptions().position(place).title(
-                            filteredValues.get(i).getName()).snippet("Under Construction"));
+                            filteredValues.get(i).getName()).snippet(
+                                            filteredValues.get(i).getCapacity()));
 
            // map.addMarker(new MarkerOptions().position(place).visible(false));
 
         }
-
 
 
         //Create a mask that toggles the visibility of select shelters that the filter outputs
@@ -185,6 +163,7 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
 
     }
+
 
 
 

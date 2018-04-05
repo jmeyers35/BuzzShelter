@@ -46,7 +46,9 @@ public class ShelterListActivity extends AppCompatActivity {
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
+
     private boolean mTwoPane;
+    //# TODO figure out a way to dynamcially pass in values to map activity
     private ArrayList<Shelter> mValuesFiltered;
     public final SimpleItemRecyclerViewAdapter mAdapter =
             new SimpleItemRecyclerViewAdapter(Model.getInstance().getShelters());
@@ -88,7 +90,6 @@ public class ShelterListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 //Passing in the filter values with Intents
                 Intent mapNavigation = new Intent(
