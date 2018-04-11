@@ -1,12 +1,15 @@
 package edu.gatech.cs2340.team67.homelessshelter.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Information-holder for shelters.
  *
  * Created by jacobmeyers on 2/22/18.
  */
 
-public class Shelter {
+public class Shelter implements Parcelable {
 
     private int id;
     private String name;
@@ -98,5 +101,49 @@ public class Shelter {
 
     public String getVacancy() { return vacancy; }
 
+
+    //Parcelable methods
+    public Shelter(Parcel in){
+
+        // the order needs to be the same as in writeToParcel() method
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.capacity = in.readString();
+        this.restrictions = in.readString();
+        this.longitude = in.readDouble();
+        this.latitude = in.readDouble();
+        this.address = in.readString();
+        this.phoneNumber = in.readString();
+        this.vacancy = in.readString();
+    }
+
+
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(capacity);
+        dest.writeString(restrictions);
+        dest.writeDouble(longitude);
+        dest.writeDouble(latitude);
+        dest.writeString(address);
+        dest.writeString(phoneNumber);
+        dest.writeString(vacancy);
+
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Shelter createFromParcel(Parcel in) {
+            return new Shelter(in);
+        }
+
+        public Shelter[] newArray(int size) {
+            return new Shelter[size];
+        }
+    };
 
 }
