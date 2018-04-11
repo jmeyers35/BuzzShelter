@@ -76,8 +76,8 @@ public class ShelterDetailFragment extends Fragment {
 
 
             Spinner numberBedsSpinner = (Spinner) rootView.findViewById(R.id.vacancy_spinner);
-            Integer[] spinnerValues = new Integer[Shelter.MAX_RESRERVATION + 1];
-            for (int i = 0; i <= Shelter.MAX_RESRERVATION; i++) {
+            Integer[] spinnerValues = new Integer[Shelter.MAX_RESERVATION + 1];
+            for (int i = 0; i <= Shelter.MAX_RESERVATION; i++) {
                 spinnerValues[i] = i;
             }
             ArrayAdapter<Integer> spinnerAdapter = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, spinnerValues);

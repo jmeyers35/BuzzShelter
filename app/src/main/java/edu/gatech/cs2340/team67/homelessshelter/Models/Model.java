@@ -3,6 +3,7 @@ package edu.gatech.cs2340.team67.homelessshelter.Models;
 import android.util.Log;
 
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +30,12 @@ public class Model {
 
     /** Singleton instance */
     private static final Model _instance = new Model();
+
+    /**
+     * Getter for the (only) instance of Model.
+     *
+     * @return The instance of Model.
+     */
     public static Model getInstance() { return _instance; }
 
     /** holds the list of all users */
@@ -45,6 +52,11 @@ public class Model {
 
     }
 
+    /**
+     * Adds a new user to the database and the local list of Users.
+     *
+     * @param user User instance to be added.
+     */
     public void addUser(User user) {
         DatabaseReference dbUsers = _database.getReference("users");
         dbUsers.child(Integer.toString(user.getUid())).setValue(user);
@@ -52,17 +64,24 @@ public class Model {
 
     }
 
+    /**
+     * Adds a new User instance with passed-in username and admin status to both the database and
+     * the local list of Users.
+     *
+     * @param username Username of the User.
+     * @param isAdmin Whether this user is an admin or not.
+     */
     public void addUser(String username, boolean isAdmin) {
         addUser(new User(username,isAdmin));
     }
 
-
-    /*
-   * Looks for Shelter by name
-   * @param name Shelter's name
-   * @return Shelter object with name, or "error" shelter if it does not exist
-   *
-   */
+    /**
+     * Searches for a Shelter in the list of Shelters with a name matching the passed-in name.
+     * Throws a NoSuchElementException if there is no Shelter in _shelters with this name.
+     *
+     * @param name Name of the shelter to search for.
+     * @return The Shelter instance with a name matching the
+     */
     public Shelter getShelterByName(String name) {
         for(Shelter s : _shelters) {
             if (s.getName().equals(name)){
@@ -74,15 +93,44 @@ public class Model {
     }
 
 
-
+    /**
+     * Getter for the list of currently registered users.
+     *
+     * @return A List of users currently registered with the application.
+     */
     public List<User> getUsers(){ return _users; }
+
+    /**
+     * Getter for the list of shelters that we have information for.
+     *
+     * @return A List of shelters we have info for.
+     */
     public List<Shelter> getShelters() {return _shelters;}
+
+    /**
+     * Sets the current user to the passed-in user. Used at login.
+     *
+     * @param user User instance to represent the currently logged-in user.
+     */
     public void setCurrentUser(User user ) {
         _currentUser = user;
     }
+
+    /**
+     * Getter for the currently logged-in user.
+     *
+     * @return User instance that represents the currently logged-in user.
+     */
     public User getCurrentUser() { return _currentUser; }
 
-
+    /**
+     * Searches the list of registered users for a User instance with an email that
+     * matches the passed-in email. Throws a NoSuchElementException if there is no user
+     * with this email in the list of Users.
+     *
+     * @param email Email of the user we want to find.
+     * @return The User instance with the passed-in email.
+     */
     public User findUserByEmail(String email) {
         for (User u: _users) {
             if (u.getUsername() == null) {
@@ -95,10 +143,10 @@ public class Model {
         throw new NoSuchElementException("Cannot find user with this email");
     }
 
-    /*
-      * Loads users from database
-      * @param ds datasnapshot
-      *
+    /**
+      * Loads users from database. This is done by taking in a DataSnapshot,
+      * iterating over each child, and adding the corresponding User instance to _users.
+      * @param ds Iterable representation of the current database.
       */
     public void loadUsers(DataSnapshot ds) {
         if (_users.isEmpty()) {
@@ -109,9 +157,10 @@ public class Model {
         }
     }
 
-    /*
-      * Loads shelters from database
-      * @param ds datasnapshot
+    /**
+      * Loads shelters from database. This is done by taking in a DataSnapshot,
+      * iterating over each child, and adding the corresponding Shelter instance to _shelters.
+      * @param ds Iterable representation of the current database.
       *
       */
     public void loadShelters(DataSnapshot ds) {
@@ -123,9 +172,10 @@ public class Model {
         }
     }
 
-    /*
-     * Updates Shelter in database
-     * @param shelter Shelter reference
+    /**
+     * Updates a Shelter in the database. This is called whenever a change is made
+     * locally to the state of the Shelter, e.g. a user makes a reservation at a shelter.
+     * @param shelter Shelter instance corresponding with the Shelter to be updated in the database.
      *
      */
     public void updateShelterDatabase(Shelter shelter) {
@@ -133,9 +183,10 @@ public class Model {
         shelters.child(Integer.toString(shelter.getId())).setValue(shelter);
     }
 
-    /*
-     * Updates User in database
-     * @param user user reference
+    /**
+     * Updates a User in database. This is called whenever a change is made locally to the state of
+     * the User, e.g. the user decides to cancel their reservations.
+     * @param user User reference corresponding with the User to be updated in the database.
      *
      */
     public void updateUserDatabase(User user) {

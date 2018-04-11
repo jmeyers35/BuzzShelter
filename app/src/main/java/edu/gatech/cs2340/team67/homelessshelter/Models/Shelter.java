@@ -18,7 +18,7 @@ public class Shelter {
     private String phoneNumber;
     private String vacancy;
 
-    public static int MAX_RESRERVATION = 10;
+    public static final int MAX_RESERVATION = 10;
 
     public Shelter(){} //done for firebase database
 
@@ -36,9 +36,9 @@ public class Shelter {
         this.vacancy = capacity; //#TODO: CHANGE VACANCY/CAPACITY TO INT BY CLEANING UP DATABASE
     }
 
-    /*
+    /**
     * Update vacancies upon request
-    * @param requestedBeds number of beds to reserve
+    * @param numBedsRequested number of beds to reserve
     * @return true if successful, false if too many beds requested or not enough vacancies available.
     *
     */
@@ -46,7 +46,7 @@ public class Shelter {
         //#TODO: this will not need to throw an exception when vacancy is updated to int
         int numBedsAvailable = Integer.parseInt(vacancy);
 
-        if (numBedsRequested > MAX_RESRERVATION || numBedsAvailable - numBedsRequested < 0) {
+        if (numBedsRequested > MAX_RESERVATION || numBedsAvailable - numBedsRequested < 0) {
             return false; //not enough space or too many beds
         } else {
             //enough space
@@ -59,9 +59,9 @@ public class Shelter {
 
     }
 
-    /*
+    /**
     * Clear a reservation, opposite of reserve vacancy
-    * @param requestedBeds number of beds to be cleared
+    * @param numBedsReserved number of beds to be cleared
     *
     */
     public void clearReservation(int numBedsReserved) {

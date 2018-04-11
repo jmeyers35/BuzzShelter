@@ -22,7 +22,7 @@ public class User {
 
     }
 
-    /*
+    /**
     * Reserve beds at a shelter
     * @param requestedBeds number of beds to reserve
     * @param shelter Shelter at which to reserve beds
@@ -44,7 +44,7 @@ public class User {
         return false;
     }
 
-    /*
+    /**
     * Clear user's reservations
     *
     */
@@ -72,7 +72,20 @@ public class User {
     public void setReservedShelter(Shelter shelter) { this.reservedShelter = shelter; }
     public void setReservedBedsNumber(int numberOfBeds) { this.reservedBedsNumber = numberOfBeds; }
 
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User otherUser = (User) o;
 
+        return this.username.equals(otherUser.username) && this.isAdmin == otherUser.isAdmin;
+    }
 
 
 

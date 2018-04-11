@@ -112,8 +112,8 @@ public class ShelterDetailActivity extends AppCompatActivity {
 
         if(requestedBeds == 0) {
             text = "You must reserve at least 1 bed";
-        } else if (requestedBeds > Shelter.MAX_RESRERVATION){
-            text = "Please request fewer than " + Shelter.MAX_RESRERVATION + " beds";
+        } else if (requestedBeds > Shelter.MAX_RESERVATION){
+            text = "Please request fewer than " + Shelter.MAX_RESERVATION + " beds";
         } else {
             try {
                 if (currentUser.reserveBeds(requestedBeds, selectedShelter)) {
