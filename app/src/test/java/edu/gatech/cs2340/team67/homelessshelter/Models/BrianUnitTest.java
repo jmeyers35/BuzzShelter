@@ -1,4 +1,22 @@
-package edu.gatech.cs2340.team67.homelessshelter;
+package edu.gatech.cs2340.team67.homelessshelter.Models;
+
+import android.provider.ContactsContract;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+
+import static org.mockito.Matchers.anyString;
+
+import static org.mockito.Mockito.when;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -13,13 +31,33 @@ import static org.junit.Assert.*;
 
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Unit Testing for finding shelters in our model
  */
-public class ModelUnitTest {
+@RunWith(PowerMockRunner.class)
+@PowerMockRunnerDelegate(JUnit4.class)
+@PrepareForTest({FirebaseDatabase.class})
+public class BrianUnitTest {
+    private Model _model;
     @Before public void getShelterByNameTest_before() {
-        Model _model = Model.getInstance();
+        // Need a mock DatabaseReference and FirebaseReference
+        DatabaseReference mockReference = Mockito.mock(DatabaseReference.class);
+        FirebaseDatabase mockedDatabase = Mockito.mock(FirebaseDatabase.class);
+        /* These lines make it so that when _database.getReference() or _database.getReference(String) is called (e.g.
+         * Model line 61), the mock DatabaseReference is returned.
+         */
+        when(mockedDatabase.getReference(anyString())).thenReturn(mockReference);
+        when(mockedDatabase.getReference()).thenReturn(mockReference);
+
+        /* These lines make sure the mock FirebaseDatabase is returned when FirebaseDatabase.getInstance
+         * is called (e.g. Model line 51).
+         */
+        PowerMockito.mockStatic(FirebaseDatabase.class);
+        when(FirebaseDatabase.getInstance()).thenReturn(mockedDatabase);
+
+        // When a DatabaseReference has .child() called on it (e.g. Model line 62)
+        when(mockReference.child(anyString())).thenReturn(mockReference);
+
+        _model = Model.getInstance();
         _model.getShelters().clear();
     }
 
@@ -29,7 +67,7 @@ public class ModelUnitTest {
         Shelter shelter_match = new Shelter(0, shelter_name_match, "50", "none", 0.123, 0.123, "123 my address", "555-555-5555");
         Shelter shelter_misc1 = new Shelter(1, "test1", "134", "men",1.6,1.8, "120 Atlanta GA", "555-555-5555");
         Shelter shelter_misc2 = new Shelter(2, "test2", "3", "women", 1.2, 1.5, "150 Atlanta Ga", "555-555-5555");
-        Model _model = Model.getInstance();
+
         List<Shelter> shelterList = _model.getShelters();
         shelterList.clear();
         shelterList.add(shelter_match);
@@ -47,7 +85,7 @@ public class ModelUnitTest {
         Shelter shelter_match = new Shelter(0, shelter_name_match, "50", "none", 0.123, 0.123, "123 my address", "555-555-5555");
         Shelter shelter_misc1 = new Shelter(1, "test1", "134", "men",1.6,1.8, "120 Atlanta GA", "555-555-5555");
         Shelter shelter_misc2 = new Shelter(2, "test2", "3", "women", 1.2, 1.5, "150 Atlanta Ga", "555-555-5555");
-        Model _model = Model.getInstance();
+
         List<Shelter> shelterList = _model.getShelters();
         shelterList.clear();
         shelterList.add(shelter_match);
