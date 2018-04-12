@@ -1,4 +1,4 @@
-epackage edu.gatech.cs2340.team67.homelessshelter;
+package edu.gatech.cs2340.team67.homelessshelter;
 
 import org.junit.Test;
 
