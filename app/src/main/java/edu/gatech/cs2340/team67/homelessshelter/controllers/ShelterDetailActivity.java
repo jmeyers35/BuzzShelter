@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +10,13 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
-import edu.gatech.cs2340.team67.homelessshelter.Models.User;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.Shelter;
+import edu.gatech.cs2340.team67.homelessshelter.models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 /**
@@ -34,12 +33,12 @@ public class ShelterDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar =  findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
         selectedShelter = _model.getShelterByName(getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +100,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
  *
  */
     public void buttonReserveCallBack(View view) {
-        Spinner vacancySpinner = (Spinner) findViewById(R.id.vacancy_spinner);
+        Spinner vacancySpinner = findViewById(R.id.vacancy_spinner);
 
         int requestedBeds = Integer.parseInt(vacancySpinner.getSelectedItem().toString());
         User currentUser = _model.getCurrentUser();

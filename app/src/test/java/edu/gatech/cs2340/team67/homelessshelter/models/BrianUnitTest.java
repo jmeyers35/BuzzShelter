@@ -1,6 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Models;
-
-import android.provider.ContactsContract;
+package edu.gatech.cs2340.team67.homelessshelter.models;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,9 +21,6 @@ import org.junit.Before;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 
 
@@ -14,16 +14,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 
 
@@ -33,14 +32,12 @@ import java.util.HashMap;
 
 public class MapActivity extends ShelterListActivity implements OnMapReadyCallback {
 
-    private GoogleMap map;
-
     private static final double EARTHRADIUS = 6366198;
 
 
-    boolean mTwoPane;
-    ArrayList<Shelter> filteredValues = null;
-    final SimpleItemRecyclerViewAdapter mAdapter =
+
+    private ArrayList<Shelter> filteredValues = null;
+    private final SimpleItemRecyclerViewAdapter mAdapter =
             new SimpleItemRecyclerViewAdapter(Model.getInstance().getShelters());
 
 
@@ -65,7 +62,7 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
         filteredValues = getIntent().getParcelableArrayListExtra("Shelters");
 
 
-        SearchView searchView = (SearchView) findViewById(R.id.searchview1);
+        SearchView searchView =  findViewById(R.id.searchview1);
         // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -83,7 +80,7 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
@@ -94,7 +91,6 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
     //Where the markers are going to be added
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
 
         //Trying to center the coordinates around atlanta
         LatLng Atlanta = new LatLng(33.74, -84.38);
@@ -111,15 +107,15 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
         LatLngBounds tmpBounds = builder.build();
 
         LatLng center = tmpBounds.getCenter();
-        LatLng northEast = move(center, 10000, 10000);
-        LatLng southWest = move(center, 10000, -10000);
+        LatLng northEast = move(center, 10000);
+        LatLng southWest = move(center, -10000);
         builder.include(southWest);
         builder.include(northEast);
 
         LatLngBounds bounds = builder.build();
 
 
-        map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,0));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,0));
 
         //Toolbar
         googleMap.getUiSettings().setMapToolbarEnabled(false);
@@ -128,8 +124,6 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
         //Gets the current list of shelters
 
-
-        HashMap <LatLng, Integer> visibilityMap = new HashMap<>();
 
 
         //Add places to the HashMap with a visibility of 1
@@ -141,7 +135,7 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
            // visibilityMap.put(place, 1);
 
-            map.addMarker(
+            googleMap.addMarker(
                     new MarkerOptions().position(place).title(
                             filteredValues.get(i).getName()).snippet(
                                             "Capacity: " + filteredValues.get(i).getCapacity()));
@@ -157,8 +151,6 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
 
 
-        //Marker.setVisibile(boolean)
-
         //Mess with the visibility settings on the
 
     }
@@ -168,13 +160,12 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
     /**
      * Creates the boundaries for Boundary Box above
      * @param startLL beginning Longitude and Latitude
-     * @param toNorth how far north
      * @param toEast how far east
      * @return void
      */
-    private static LatLng move(LatLng startLL, double toNorth, double toEast) {
+    private static LatLng move(LatLng startLL, double toEast) {
         double lonDiff = meterToLongitude(toEast, startLL.latitude);
-        double latDiff = meterToLatitude(toNorth);
+        double latDiff = meterToLatitude((double) 10000);
         return new LatLng(startLL.latitude + latDiff, startLL.longitude
                 + lonDiff);
     }
@@ -195,8 +186,8 @@ public class MapActivity extends ShelterListActivity implements OnMapReadyCallba
 
     /**
      * Calculates the Longitude Difference
-     * @param meterToNorth
-     * @return
+     * @param meterToNorth How far north
+     * @return calculated latitude
      */
     private static double meterToLatitude(double meterToNorth) {
         double rad = meterToNorth / EARTHRADIUS;

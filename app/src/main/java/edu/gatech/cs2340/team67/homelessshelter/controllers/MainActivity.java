@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +10,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseAuth mAuth;
-    Model _model;
+    private FirebaseAuth mAuth;
+    private Model _model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

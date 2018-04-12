@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.User;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "LoginActiviy";
+    private static final String TAG = "LoginActivity";
     private EditText editTextUsername;
     private EditText editTextPassword;
     private FirebaseAuth mAuth;
@@ -35,13 +34,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
 
-        editTextUsername = (EditText)findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
     }
 
     public void buttonLoginCallback(View view) {
-        Model _model = Model.getInstance();
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         signIn(email, password);
@@ -72,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             Log.d(TAG, "emailLogin: fail");
-                            displayErrorToast("Authentication failed.");
+                            displayErrorToast();
                         }
                     }
                 });
@@ -101,11 +99,11 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void displayErrorToast(CharSequence cs) {
+    private void displayErrorToast() {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, cs, duration);
+        Toast toast = Toast.makeText(context, "Authentication Failed", duration);
         toast.show();
     }
 

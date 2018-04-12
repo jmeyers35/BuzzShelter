@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="edu.gatech.cs2340.team67.homelessshelter.Controllers.ShelterDetailActivity"
+    tools:context="edu.gatech.cs2340.team67.homelessshelter.controllers.ShelterDetailActivity"
     tools:ignore="MergeRootFrame">
 
     <android.support.design.widget.AppBarLayout

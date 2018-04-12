@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Controllers.WelcomeActivity">
+        <activity android:name=".controllers.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +37,7 @@
             <!--android:value="AIzaSyDSn_8uoNrhmyyZgN16R86-9Uk0QHKOkV4" />-->
 
         <!--<activity-->
-            <!--android:name=".Controllers.MapActivity"-->
+            <!--android:namcontrollerslers.MapActivity"-->
             <!--android:label="@string/title_map">-->
                 <!--<intent-filter>-->
                     <!--<action android:name="android.intent.action.MAIN" />-->
@@ -51,9 +51,9 @@
             android:value="AIzaSyDSn_8uoNrhmyyZgN16R86-9Uk0QHKOkV4" />
 
         <activity
-            android:name=".Controllers.MapActivity"
+            android:name=".controllers.MapActivity"
             android:label="@string/title_map"
-            android:parentActivityName=".Controllers.MainActivity"
+            android:parentActivityName=".controllers.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,30 +75,30 @@
         <!-- End of Map Activity-->
 
         <activity
-            android:name=".Controllers.LoginActivity"
-            android:parentActivityName=".Controllers.WelcomeActivity" />
+            android:name=".controllers.LoginActivity"
+            android:parentActivityName=".controllers.WelcomeActivity" />
         <activity
-            android:name=".Controllers.RegisterActivity"
-            android:parentActivityName=".Controllers.WelcomeActivity" />
-        <activity android:name=".Controllers.MainActivity" />
+            android:name=".controllers.RegisterActivity"
+            android:parentActivityName=".controllers.WelcomeActivity" />
+        <activity android:name=".controllers.MainActivity" />
 
         <activity
-            android:name=".Controllers.ShelterListActivity"
+            android:name=".controllers.ShelterListActivity"
             android:label="@string/title_shelter_list"
-            android:parentActivityName=".Controllers.MainActivity"
+            android:parentActivityName=".controllers.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.gatech.cs2340.team67.homelessshelter.Controllers.MainActivity" />
+                android:value="edu.gatech.cs2340.team67.homelessshelter.controllers.MainActivity" />
         </activity>
         <activity
-            android:name=".Controllers.ShelterDetailActivity"
+            android:name=".controllers.ShelterDetailActivity"
             android:label="@string/title_shelter_detail"
-            android:parentActivityName=".Controllers.ShelterListActivity"
+            android:parentActivityName=".controllers.ShelterListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.gatech.cs2340.team67.homelessshelter.Controllers.ShelterListActivity" />
+                android:value="edu.gatech.cs2340.team67.homelessshelter.controllers.ShelterListActivity" />
         </activity>
     </application>
 

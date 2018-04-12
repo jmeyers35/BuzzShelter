@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="edu.gatech.cs2340.team67.homelessshelter.Controllers.ShelterListActivity"
+    tools:context="edu.gatech.cs2340.team67.homelessshelter.controllers.ShelterListActivity"
     tools:listitem="@layout/shelter_list_content" />

@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +20,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 
@@ -46,11 +46,11 @@ public class ShelterListActivity extends AppCompatActivity {
     private boolean mTwoPane;
     //# TODO figure out a way to dynamcially pass in values to map activity
     private List<Shelter> mValuesFiltered;
-    public final SimpleItemRecyclerViewAdapter mAdapter =
+    private final SimpleItemRecyclerViewAdapter mAdapter =
             new SimpleItemRecyclerViewAdapter(Model.getInstance().getShelters());
 
 
-    public List<Shelter> getMValuesFiltered() {
+    private List<Shelter> getMValuesFiltered() {
         return mValuesFiltered;
     }
 
@@ -61,7 +61,7 @@ public class ShelterListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_list);
 
-        SearchView searchView = (SearchView) findViewById(R.id.searchview1);
+        SearchView searchView = findViewById(R.id.searchview1);
         // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -79,11 +79,11 @@ public class ShelterListActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fmap);
+        FloatingActionButton fab =  findViewById(R.id.fmap);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,8 +201,8 @@ public class ShelterListActivity extends AppCompatActivity {
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mIdView =  view.findViewById(R.id.id_text);
+                mContentView =  view.findViewById(R.id.content);
             }
         }
 

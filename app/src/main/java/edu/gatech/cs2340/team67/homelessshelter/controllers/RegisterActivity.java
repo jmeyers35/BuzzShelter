@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,17 +19,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.User;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class RegisterActivity extends AppCompatActivity {
     private final static String TAG = "RegisterActivity";
-    EditText editTextUsername;
-    EditText editTextPassword;
-    CheckBox checkBoxAdminStatus;
-    FirebaseAuth mAuth;
-    Model model = Model.getInstance();
+    private EditText editTextUsername;
+    private EditText editTextPassword;
+    private CheckBox checkBoxAdminStatus;
+    private FirebaseAuth mAuth;
+    private final Model model = Model.getInstance();
 
 
     @Override
@@ -38,9 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
 
-        editTextUsername = (EditText)findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
-        checkBoxAdminStatus = (CheckBox)findViewById(R.id.checkBoxAdminStatus);
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        checkBoxAdminStatus = findViewById(R.id.checkBoxAdminStatus);
     }
 
 

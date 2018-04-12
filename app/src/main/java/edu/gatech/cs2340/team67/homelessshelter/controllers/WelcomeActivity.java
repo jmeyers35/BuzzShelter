@@ -1,13 +1,9 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
-import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,17 +13,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileNotFoundException;
-
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     private final Model model = Model.getInstance();
-    private final String TAG = "Welcome_Activity";
     private FirebaseAuth mAuth;
-    private FirebaseDatabase db;
+
 
 
     @Override
@@ -35,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         mAuth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference shelters = db.getReference("shelters");
         shelters.addValueEventListener(new ValueEventListener() {

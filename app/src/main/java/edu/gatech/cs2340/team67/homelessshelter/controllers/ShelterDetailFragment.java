@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Controllers;
+package edu.gatech.cs2340.team67.homelessshelter.controllers;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,8 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import edu.gatech.cs2340.team67.homelessshelter.Models.Model;
-import edu.gatech.cs2340.team67.homelessshelter.Models.Shelter;
+import edu.gatech.cs2340.team67.homelessshelter.models.Model;
+import edu.gatech.cs2340.team67.homelessshelter.models.Shelter;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 /**
@@ -52,7 +52,7 @@ public class ShelterDetailFragment extends Fragment {
             mItem = _model.getShelterByName(getArguments().getString(ARG_ITEM_ID)); //GETS THE SHELTER OBJECT WE CLICKED ON
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout =  activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getName());
             }
@@ -75,12 +75,12 @@ public class ShelterDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.phoneNumber)).setText(mItem.getPhoneNumber());
 
 
-            Spinner numberBedsSpinner = (Spinner) rootView.findViewById(R.id.vacancy_spinner);
+            Spinner numberBedsSpinner = rootView.findViewById(R.id.vacancy_spinner);
             Integer[] spinnerValues = new Integer[Shelter.MAX_RESERVATION + 1];
             for (int i = 0; i <= Shelter.MAX_RESERVATION; i++) {
                 spinnerValues[i] = i;
             }
-            ArrayAdapter<Integer> spinnerAdapter = new ArrayAdapter<Integer>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, spinnerValues);
+            ArrayAdapter<Integer> spinnerAdapter = new ArrayAdapter<>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, spinnerValues);
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
             numberBedsSpinner.setAdapter(spinnerAdapter);

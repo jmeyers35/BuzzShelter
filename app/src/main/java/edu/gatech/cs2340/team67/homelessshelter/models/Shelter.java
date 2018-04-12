@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Models;
+package edu.gatech.cs2340.team67.homelessshelter.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

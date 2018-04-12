@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.team67.homelessshelter.Models;
+package edu.gatech.cs2340.team67.homelessshelter.models;
 
 /**
  * Created by BCochran on 2/20/2018.
@@ -59,19 +59,12 @@ public class User {
     }
 
     public String getUsername() { return username; }
-    public boolean getAdminStatus() { return isAdmin; }
     public Shelter getReservedShelter() { return reservedShelter; }
     public int getReservedBedsNumber() { return reservedBedsNumber; }
     public boolean hasReservation() { return reservedBedsNumber > 0; }
     public int getUid() { return uid; }
 
 
-    //setters for firebase db
-    public void setUsername(String username) { this.username = username; }
-    public void setUid(int id) { this.uid = id; }
-    public void setAdminStatus(boolean isAdmin) { this.isAdmin = isAdmin; }
-    public void setReservedShelter(Shelter shelter) { this.reservedShelter = shelter; }
-    public void setReservedBedsNumber(int numberOfBeds) { this.reservedBedsNumber = numberOfBeds; }
 
     public boolean equals(Object o) {
         if (o == null) {

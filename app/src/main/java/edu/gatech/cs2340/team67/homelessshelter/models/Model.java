@@ -1,18 +1,10 @@
-package edu.gatech.cs2340.team67.homelessshelter.Models;
-
-import android.util.Log;
+package edu.gatech.cs2340.team67.homelessshelter.models;
 
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +31,14 @@ public final class Model {
     public static Model getInstance() { return _instance; }
 
     /** holds the list of all users */
-    private List<User> _users;
+    private final List<User> _users;
     private User _currentUser;  //This will be changing with future features, so should not be final
-    private List<Shelter> _shelters; //This will be changing with future features, so should not be final
-    private FirebaseDatabase _database;
+    private final List<Shelter> _shelters; //This will be changing with future features, so should not be final
+    private final FirebaseDatabase _database;
 
     private Model(){
-        _users = new ArrayList<User>();
-        _shelters = new ArrayList<Shelter>();
+        _users = new ArrayList<>();
+        _shelters = new ArrayList<>();
         _database = FirebaseDatabase.getInstance();
 
     }
@@ -63,16 +55,7 @@ public final class Model {
 
     }
 
-    /**
-     * Adds a new User instance with passed-in username and admin status to both the database and
-     * the local list of Users.
-     *
-     * @param username Username of the User.
-     * @param isAdmin Whether this user is an admin or not.
-     */
-    public void addUser(String username, boolean isAdmin) {
-        addUser(new User(username,isAdmin));
-    }
+
 
     /**
      * Searches for a Shelter in the list of Shelters with a name matching the passed-in name.
@@ -92,12 +75,7 @@ public final class Model {
     }
 
 
-    /**
-     * Getter for the list of currently registered users.
-     *
-     * @return A List of users currently registered with the application.
-     */
-    public List<User> getUsers(){ return _users; }
+
 
     /**
      * Getter for the list of shelters that we have information for.
@@ -201,9 +179,8 @@ public final class Model {
      * ArrayList.
      *
      * @param csv the csv InputStream to read
-     * @throws FileNotFoundException If we can't find the file we want to read.
      */
-    public void readCSV(InputStream csv) throws FileNotFoundException {
+    public void readCSV(InputStream csv) {
 
         Scanner scanner = new Scanner(csv);
         scanner.nextLine(); // Skip header
