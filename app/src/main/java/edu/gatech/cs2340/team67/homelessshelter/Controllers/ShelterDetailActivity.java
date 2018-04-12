@@ -28,7 +28,7 @@ import edu.gatech.cs2340.team67.homelessshelter.R;
  */
 public class ShelterDetailActivity extends AppCompatActivity {
     private Shelter selectedShelter;
-    private Model _model = Model.getInstance();
+    private final Model _model = Model.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

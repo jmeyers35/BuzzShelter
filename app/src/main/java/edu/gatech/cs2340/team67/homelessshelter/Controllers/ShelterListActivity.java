@@ -170,8 +170,8 @@ public class ShelterListActivity extends AppCompatActivity {
         };
 
         SimpleItemRecyclerViewAdapter(List<Shelter> items) {
-            mValues = items;
-            mValuesFiltered = items;
+            mValues = items; //This was android's template's way of doing it.
+            mValuesFiltered = items; //This was android's template's way of doing it.
         }
 
         @Override

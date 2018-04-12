@@ -23,12 +23,13 @@ public class User {
     }
 
     /**
-    * Reserve beds at a shelter
-    * @param requestedBeds number of beds to reserve
-    * @param shelter Shelter at which to reserve beds
-    * @return true if successful, false if user already has reservations
-    *
-    */
+     * Reserve beds at a shelter
+     * @param requestedBeds number of beds to reserve
+     * @param shelter Shelter at which to reserve beds
+     * @return true if successful, false if user already has reservations
+     * @throws java.lang.NumberFormatException throws nfe if shelter doesn't allow reservations
+     *
+     */
     public boolean reserveBeds(int requestedBeds, Shelter shelter) throws NumberFormatException {
         //#TODO: does not need to throw exception when capacity is set to INTEGER
         if (!hasReservation()) {
@@ -52,7 +53,7 @@ public class User {
         if (hasReservation()) {
             reservedShelter.clearReservation(reservedBedsNumber);
             reservedBedsNumber = 0;
-            reservedShelter = null;
+            reservedShelter = null; //This assignment to null necessary to clear the User's reservation
             Model.getInstance().updateUserDatabase(this); // update database
         }
     }
@@ -84,7 +85,7 @@ public class User {
         }
         User otherUser = (User) o;
 
-        return this.username.equals(otherUser.username) && this.isAdmin == otherUser.isAdmin;
+        return (this.username.equals(otherUser.username)) && (this.isAdmin == otherUser.isAdmin);
     }
 
 

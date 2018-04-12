@@ -24,7 +24,7 @@ import edu.gatech.cs2340.team67.homelessshelter.Models.User;
 import edu.gatech.cs2340.team67.homelessshelter.R;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static String TAG = "RegisterActivity";
+    private final static String TAG = "RegisterActivity";
     EditText editTextUsername;
     EditText editTextPassword;
     CheckBox checkBoxAdminStatus;

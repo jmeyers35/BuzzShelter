@@ -23,8 +23,24 @@ public class Shelter implements Parcelable {
 
     public static final int MAX_RESERVATION = 10;
 
+    /**
+     * Empty shelter constructor; ONLY FOR FIREBASE USE
+     *
+     */
     public Shelter(){} //done for firebase database
 
+    /**
+     * Constructs Shelter from information
+     * @param id internal id of shelter
+     * @param name name of shelter
+     * @param capacity number of beds/rooms available total.
+     * @param restrictions restrictions on who can use the shelter (male/female, etc)
+     * @param longitude longitudinal coordinate
+     * @param latitude latitudinal coordinate
+     * @param address physical address of shelter
+     * @param phoneNumber contact phone number
+     *
+     */
     public Shelter(int id, String name, String capacity, String restrictions, double longitude, double latitude,
                    String address, String phoneNumber) {
         this.id = id;
@@ -40,16 +56,17 @@ public class Shelter implements Parcelable {
     }
 
     /**
-    * Update vacancies upon request
-    * @param numBedsRequested number of beds to reserve
-    * @return true if successful, false if too many beds requested or not enough vacancies available.
-    *
-    */
+     * Update vacancies upon request
+     * @param numBedsRequested number of beds to reserve
+     * @return true for success, false if too many beds requested or not enough vacancies available
+     * @throws java.lang.NumberFormatException throws nfe if the vacancy is not a number
+     *
+     */
     public boolean reserveVacancy(int numBedsRequested) throws NumberFormatException {
         //#TODO: this will not need to throw an exception when vacancy is updated to int
         int numBedsAvailable = Integer.parseInt(vacancy);
 
-        if (numBedsRequested > MAX_RESERVATION || numBedsAvailable - numBedsRequested < 0) {
+        if ((numBedsRequested > MAX_RESERVATION) || (numBedsAvailable - numBedsRequested < 0)) {
             return false; //not enough space or too many beds
         } else {
             //enough space
@@ -117,7 +134,7 @@ public class Shelter implements Parcelable {
         this.vacancy = in.readString();
     }
 
-
+    @Override
     public int describeContents(){
         return 0;
     }
@@ -137,10 +154,12 @@ public class Shelter implements Parcelable {
 
     }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        @Override
         public Shelter createFromParcel(Parcel in) {
             return new Shelter(in);
         }
 
+        @Override
         public Shelter[] newArray(int size) {
             return new Shelter[size];
         }

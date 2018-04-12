@@ -26,7 +26,7 @@ import java.util.Scanner;
  * Created by BCochran on 2/20/2018.
  */
 
-public class Model {
+public final class Model {
 
     /** Singleton instance */
     private static final Model _instance = new Model();
@@ -40,13 +40,12 @@ public class Model {
 
     /** holds the list of all users */
     private List<User> _users;
-    private User _currentUser;
-    private List<Shelter> _shelters;
+    private User _currentUser;  //This will be changing with future features, so should not be final
+    private List<Shelter> _shelters; //This will be changing with future features, so should not be final
     private FirebaseDatabase _database;
 
     private Model(){
         _users = new ArrayList<User>();
-        _currentUser = null;
         _shelters = new ArrayList<Shelter>();
         _database = FirebaseDatabase.getInstance();
 
@@ -201,6 +200,7 @@ public class Model {
      * for each line we find. We store all these Shelters inside _shelters, an
      * ArrayList.
      *
+     * @param csv the csv InputStream to read
      * @throws FileNotFoundException If we can't find the file we want to read.
      */
     public void readCSV(InputStream csv) throws FileNotFoundException {
