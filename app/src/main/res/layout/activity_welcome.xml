@@ -8,7 +8,6 @@
 
 
     <Button
-        android:id="@+id/buttonLogin"
         android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -24,7 +23,6 @@
         app:layout_constraintVertical_bias="0.393" />
 
     <Button
-        android:id="@+id/buttonRegister"
         android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -40,7 +38,6 @@
         app:layout_constraintVertical_bias="0.561" />
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="186dp"
         android:layout_height="57dp"
         android:layout_marginBottom="8dp"

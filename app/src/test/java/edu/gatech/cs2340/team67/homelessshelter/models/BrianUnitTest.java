@@ -87,6 +87,6 @@ public class BrianUnitTest {
         shelterList.add(shelter_misc1);
         shelterList.add(shelter_misc2);
 
-        Shelter foundShelter = _model.getShelterByName(shelter_name_notInList);
+        _model.getShelterByName(shelter_name_notInList);
 	}
 }

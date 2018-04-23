@@ -43,7 +43,6 @@
         app:layout_constraintVertical_bias="0.476" />
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="211dp"
         android:layout_height="66dp"
         android:layout_marginBottom="8dp"
@@ -58,7 +57,6 @@
         app:layout_constraintVertical_bias="0.146" />
 
     <Button
-        android:id="@+id/buttonRegister"
         android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -74,7 +72,6 @@
         app:layout_constraintVertical_bias="0.685" />
 
     <Button
-        android:id="@+id/buttonCancel"
         android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

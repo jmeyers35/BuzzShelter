@@ -64,7 +64,6 @@
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <Button
-        android:id="@+id/numberBedsRequested_button"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"

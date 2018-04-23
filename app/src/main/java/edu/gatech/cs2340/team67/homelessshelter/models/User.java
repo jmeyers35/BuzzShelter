@@ -1,7 +1,7 @@
 package edu.gatech.cs2340.team67.homelessshelter.models;
 
 /**
- * Created by BCochran on 2/20/2018.
+ * Class to represent a User.
  */
 
 public class User {

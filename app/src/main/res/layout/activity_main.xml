@@ -7,7 +7,6 @@
     tools:context="edu.gatech.cs2340.team67.homelessshelter.controllers.MainActivity">
 
     <Button
-        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -31,7 +30,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button5"
         android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

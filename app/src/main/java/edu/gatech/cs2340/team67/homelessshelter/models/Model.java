@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 
 /**
- * Created by BCochran on 2/20/2018.
+ * Our singleton Model. Handles all our Firebase calls and data structures.
  */
 
 public final class Model {
