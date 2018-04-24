@@ -7,5 +7,17 @@
     <string name="title_shelter_list">Shelters</string>
     <string name="title_shelter_detail">Shelter Detail</string>
     <string name="title_map">Map</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="welcome_login">WELCOME Please Login</string>
+    <string name="login">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="shelter_list">Shelter List</string>
+    <string name="clear_reservations">Clear Reservations</string>
+    <string name="welcome_register">WELCOME Please Register</string>
+    <string name="register">Register</string>
+    <string name="admin">I am an Admin (trust me)</string>
+    <string name="welcome">Welcome</string>
+    <string name="reserve">Reserve</string>
 
 </resources>
