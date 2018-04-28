@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Homeless Shelter</string>
-
-    <!-- Strings related to login -->
-
     <string name="main_activity_logout_button">Logout</string>
     <string name="title_shelter_list">Shelters</string>
     <string name="title_shelter_detail">Shelter Detail</string>
@@ -19,5 +16,9 @@
     <string name="admin">I am an Admin (trust me)</string>
     <string name="welcome">Welcome</string>
     <string name="reserve">Reserve</string>
+    <string name="vacancy">Vacancy: $1%s</string>
+    <string name="capacity">Capacity: $1%s</string>
+    <string name="comma">$1%d , $2%d</string>
+
 
 </resources>
