@@ -16,9 +16,9 @@
     <string name="admin">I am an Admin (trust me)</string>
     <string name="welcome">Welcome</string>
     <string name="reserve">Reserve</string>
-    <string name="vacancy">Vacancy: $1%s</string>
-    <string name="capacity">Capacity: $1%s</string>
-    <string name="comma">$1%d , $2%d</string>
+    <string name="vacancy">Vacancy: 1%s</string>
+    <string name="capacity">Capacity: 1%s</string>
+    <string name="comma">1%f , 2%f</string>
 
 
 </resources>

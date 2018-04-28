@@ -63,11 +63,8 @@ public class ShelterDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.shelter_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.name)).setText(mItem.getName());
-            //((TextView) rootView.findViewById(R.id.capacity)).setText("Capacity: " + mItem.getCapacity());
             ((TextView) rootView.findViewById(R.id.capacity)).setText(getString(R.string.capacity, mItem.getCapacity()));
             ((TextView) rootView.findViewById(R.id.vacancy)).setText(getString(R.string.vacancy, mItem.getVacancy()));
             ((TextView) rootView.findViewById(R.id.restrictions)).setText(mItem.getRestrictions());

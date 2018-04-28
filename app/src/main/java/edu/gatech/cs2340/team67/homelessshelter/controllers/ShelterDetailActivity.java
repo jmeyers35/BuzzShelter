@@ -121,7 +121,6 @@ public class ShelterDetailActivity extends AppCompatActivity {
                     _model.updateUserDatabase(currentUser);
                     _model.updateShelterDatabase(selectedShelter);
                     //update vacancy text on screen
-                    //((TextView) findViewById(R.id.vacancy)).setText("Vacancy: " + selectedShelter.getVacancy());
                     ((TextView) findViewById(R.id.vacancy)).setText(getString(R.string.vacancy, selectedShelter.getVacancy()));
 
                 } else {
