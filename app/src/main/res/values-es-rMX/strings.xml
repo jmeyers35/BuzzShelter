@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"El Refugio para Indigentes "</string>
+    <string name="main_activity_logout_button">El Cierre de Sesión</string>
+    <string name="title_shelter_list">Los Refugios</string>
+    <string name="title_shelter_detail">Detalle del Refugio</string>
+    <string name="title_map">El Mapa</string>
+    <string name="e_mail">El Correo Electrónico</string>
+    <string name="password">La Contraseña</string>
+    <string name="welcome_login">BIENVENIDO Por Favor Inicie Sesión</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="cancel">Cancelar</string>
+    <string name="shelter_list">Lista del Refugio</string>
+    <string name="clear_reservations">Despeja Reservas</string>
+    <string name="welcome_register">BIENVENIDO Por Favor Regístrese</string>
+    <string name="register">Registrar</string>
+    <string name="admin">Soy un Admin (créeme)</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="reserve">Reservar</string>
+    <string name="vacancy">La Vacante: 1%s</string>
+    <string name="capacity">La Capacidad: 1%s</string>
+    <string name="comma">1%f , 2%f</string>
+</resources>
